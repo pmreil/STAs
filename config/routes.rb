@@ -1,4 +1,11 @@
 Sta::Application.routes.draw do
+
+
+  match "about", :to => "static#about", :via => "get"
+  #get "static/about"
+
+  get "static/contact"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
