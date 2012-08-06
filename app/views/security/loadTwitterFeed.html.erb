@@ -1,0 +1,14 @@
+
+<% if @feed.nil? %>
+
+  <strong>Sorry, no tweet results were found for ${$ticker|escape}</strong>
+
+<% else %>
+	<% @feed.entries.each do |entry| %>
+  	<p>
+    	<a href="<%= entry.url %>" target="_blank"><img src="<%= entry.links[1] %>" /></a>    
+		  <%= entry.content.html_safe %><br/>
+      <span><%= entry.updated %></span>
+    </p>
+  <% end %>
+<% end %>

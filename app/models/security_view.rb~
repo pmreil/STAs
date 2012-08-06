@@ -1,0 +1,34 @@
+# == Schema Information
+# Schema version: 20110428192916
+#
+# Table name: security_views
+#
+#  id                    :integer(4)      not null, primary key
+#  security_id           :integer(4)
+#  viewer_ip_address     :string(255)
+#  viewer_browser_string :string(255)
+#  created_at            :datetime
+#  updated_at            :datetime
+#
+
+class SecurityView < ActiveRecord::Base
+  belongs_to :securities
+
+  def self.total_views( num_days = nil )
+    if !num_days.nil?
+      self.where("created_at >= '#{Time.now - num_days.days}'").count
+    else
+      self.count()
+    end
+  end
+
+  def self.percentage_views (num_days = nil)
+    if !num_days.nil?
+      (total_views num_days) / (SecurityView.count)
+    else
+      self.count() / SecurityView.count
+    end
+    SecurityView.new.count
+  end
+
+end

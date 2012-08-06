@@ -1,10 +1,15 @@
 Sta::Application.routes.draw do
 
+  #get "security/new"
 
-  match "about", :to => "static#about", :via => "get"
+  #get "users/new"
+
+  #match "about", :to => "static#about", :via => "get"
   #get "static/about"
 
-  get "static/contact"
+  #get "static/contact"
+
+  match 'ticker/:id' => 'security#loadTicker'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -61,5 +66,5 @@ Sta::Application.routes.draw do
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id(.:format)))'
+  match ':controller(/:action(/:id(.:format)))'
 end

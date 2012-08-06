@@ -1,0 +1,19 @@
+
+<%= @feedUrl %>
+
+<%= debug @feed %>
+
+<% if @feed.entries.nil? %>
+
+  <strong>Sorry, no blog results were found for ${$ticker|escape}</strong>
+
+<% else %>
+	<% @feed.entries.each do |entry| %>
+  	<p>
+    	<strong><a href="<%= entry.url %>" target="_blank"><%= entry.title %>" /></a></strong>
+		  <%= entry.content.html_safe %><br/>
+      <span><%= entry.updated %></span>
+    </p>
+  <% end %>
+<% end %>
+

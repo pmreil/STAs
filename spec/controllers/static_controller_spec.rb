@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe StaticController do
+  render_views
 
   describe "GET 'about'" do
     it "should be successful" do
