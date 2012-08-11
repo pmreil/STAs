@@ -4,6 +4,8 @@ gem 'rails', '>=3.0.6'
 
 gem 'feedzirra'
 
+gem 'activerecord-postgresql-adapter'
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
