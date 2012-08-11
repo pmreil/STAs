@@ -24,6 +24,13 @@ class SecurityController < ApplicationController
         yql_response = Net::HTTP.get_response(URI.parse(stocks_query_url))
         json = ActiveSupport::JSON
         stocks_query_data = json.decode(yql_response.body)
+
+
+logger.debug "\n\nHERE I AM \n\n"
+logger.debug puts yql_response
+logger.debug "\n\nHERE I AM \n\n"
+
+
         if stocks_query_data['query']['results']['stock']['CompanyName'].nil?
           @errors = "Ticker not found"
         else
@@ -101,7 +108,7 @@ class SecurityController < ApplicationController
          ]
       end
 
-      if cookies[@security.ticker].nil?
+      if !@security.nil? && cookies[@security.ticker].nil?
         #cookie hasnt been set or has expired, so lets save this view
         #finally set a cookie for 10 minutes so reloads arent triggered
         security_view_record = SecurityView.create(

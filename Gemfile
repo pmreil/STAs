@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.6'
+gem 'rails', '>=3.0.6'
 
 gem 'feedzirra'
 
@@ -8,13 +8,11 @@ gem 'feedzirra'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 #gem 'sqlite3-ruby', '1.3.2', :require => 'sqlite3'
-gem 'mysql'
-
-
+gem 'mysql2'
 
 group :development do
   gem 'rspec-rails', '2.5.0'
-  gem 'annotate-models'
+  gem 'annotate', ">=2.5.0"
 end
 
 group :test do
