@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>{$title|escape} - stocktickerapps.com</title>
+<title><% if !@security.nil? %><%= @security.name %> - <% end %> stocktickerapps.com</title>
 <meta http-equiv="Content-language" content="en-US" />
 <meta http-equiv="Description" content="" />
 <meta http-equiv="Keywords" content="" />
@@ -19,9 +19,9 @@ navActive = '{$navActive|escape}';
 
 <script type="text/javascript">var switchTo5x=true;</script>
 <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
-<script type="text/javascript">stLight.options({publisher: "ur-18a1bb1c-2a2c-7917-c7c4-aac3f43d7bb0"}); </script>
+<script type="text/javascript">stLight.options({publisher: "ur-e79d9e1-f51c-1414-1e26-3fbda98a2d9"}); </script><!--Load the AJAX API-->
 
-<!--Load the AJAX API-->
+
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">
    

@@ -10,14 +10,18 @@
 	</div>
 
 	<div id="socialLinks">
-		<div><script type="text/javascript" src="http://w.sharethis.com/button/sharethis.js#publisher=0fc47242-f93a-4f38-a35f-7ff73a4b9b87&amp;type=website&amp;post_services=email%2Cfacebook%2Ctwitter%2Cgbuzz%2Cmyspace%2Cdigg%2Csms%2Cwindows_live%2Cdelicious%2Cstumbleupon%2Creddit%2Cgoogle_bmarks%2Clinkedin%2Cbebo%2Cybuzz%2Cblogger%2Cyahoo_bmarks%2Cmixx%2Ctechnorati%2Cfriendfeed%2Cpropeller%2Cwordpress%2Cnewsvine"></script>
-		</div>
-        <div><iframe src="http://www.facebook.com/plugins/like.php?href=http://{$smarty.server.SERVER_NAME}{$smarty.server.REQUEST_URI}&amp;layout=button_count&amp;show_faces=true&amp;width=100&amp;action=like&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100px;height:21px;" allowTransparency="true" ></iframe>
-        </div>
-	    <div class="reset"></div>
-	</div>
-    <div class="reset"></div>
-	</div>
+
+<span class='st_sharethis_vcount' displayText='ShareThis'></span>
+<span class='st_facebook_vcount' displayText='Facebook'></span>
+<span class='st_twitter_vcount' displayText='Tweet'></span>
+<span class='st_linkedin_vcount' displayText='LinkedIn'></span>
+<span class='st_tumblr_vcount' displayText='Tumblr'></span>
+<span class='st_email_vcount' displayText='Email'></span>
+<span class='st_plusone_vcount' displayText='Google +1'></span>
+<span class='st_fblike_vcount' displayText='Facebook Like'></span>
+
+  </div>
+  <div class="reset"></div>
 
 <script type="text/javascript">
 	var d = new Date();
