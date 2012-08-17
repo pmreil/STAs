@@ -1,4 +1,17 @@
+
+
 <div id="tickerDataWrapper">
+
+
+<% if !@errors.nil? %>
+
+
+<p><%= @errors %></p>
+
+</div>
+
+<% else %>
+
 	<h1><a href="http://www.google.com/search?q=<%=h @security.name %>&btnI=745" target="_blank"><%=h @security.name %></a> (<%=h @security.ticker %>)</h1>
 
 	<div id="widgetWrapper">
@@ -22,6 +35,7 @@
 
   </div>
   <div class="reset"></div>
+</div>
 
 <script type="text/javascript">
 	var d = new Date();
@@ -40,6 +54,8 @@
 <strong>Views in last year:</strong> <%= @security.ticker_views 365 %><br/>
 <br/>
 
+
+<% if !@security_trends.nil? %>
 <script type="text/javascript">
 
 // Set a callback to run when the Google Visualization API is loaded.
@@ -72,6 +88,8 @@ function drawVisualization() {
 }
 
 </script>
+<% end %>
+
 
 <div id="chart_div" style="width:400; height:300"></div>
 
@@ -150,3 +168,4 @@ $(document).ready(function($) {
 	<ul id="tweets"> </ul>
 
 
+<% end %>
