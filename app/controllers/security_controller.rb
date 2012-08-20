@@ -24,6 +24,7 @@ class SecurityController < ApplicationController
         yql_response = Net::HTTP.get_response(URI.parse(stocks_query_url))
         json = ActiveSupport::JSON
         stocks_query_data = json.decode(yql_response.body)
+
         if stocks_query_data['query']['results']['stock']['CompanyName'].nil?
           @errors = "Ticker not found"
         else
@@ -63,11 +64,16 @@ class SecurityController < ApplicationController
             stock_exchange_record = SecurityExchange.create(:name => stock_exchange)
           end
 
+          #lets get the name of the security too
+          name_query_url = 'http://query.yahooapis.com/v1/public/yql?q=select%20Name%20from%20yahoo.finance.quotes%20where%20symbol%20%3D%20%22'+params[:id]+'%22&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys'
+          yql_response = Net::HTTP.get_response(URI.parse(name_query_url))
+          name_query_data = json.decode(yql_response.body)
+
           #okay lets finally add the record to the security table
           if isStock
             @security = Security.create(
               :ticker => params[:id],
-              :name => stocks_query_data['query']['results']['stock']['CompanyName'],
+              :name => name_query_data['query']['results']['quote']['Name'],
               :exchange_id => stock_exchange_record.id,
               :security_type => 'stock',
               :company_industry_id => industry_record.id,
@@ -76,7 +82,7 @@ class SecurityController < ApplicationController
           else
             @security = Security.create(
               :ticker => params[:id],
-              :name => stocks_query_data['query']['results']['stock']['CompanyName'],
+              :name => name_query_data['query']['results']['quote']['Name'],
               :exchange_id => stock_exchange_record.id,
               :security_type => 'fund',
               :fund_category_id => category_record.id,
@@ -101,7 +107,7 @@ class SecurityController < ApplicationController
          ]
       end
 
-      if cookies[@security.ticker].nil?
+      if !@security.nil? && cookies[@security.ticker].nil?
         #cookie hasnt been set or has expired, so lets save this view
         #finally set a cookie for 10 minutes so reloads arent triggered
         security_view_record = SecurityView.create(

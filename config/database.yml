@@ -1,9 +1,14 @@
+
+
+
 login: &login
   encoding: utf8
-  adapter:  mysql
+  adapter: mysql2
   username: root
-  password: 4w1ll14m
-  socket: /var/run/mysqld/mysqld.sock
+  password: 
+  #socket: /var/run/mysqld/mysqld.sock
+
+
 
 development:
   <<: *login
