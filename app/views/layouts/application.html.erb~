@@ -13,10 +13,6 @@
   <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js" %>
   <%= csrf_meta_tag %>
 
-<script type="text/javascript"><!--
-navActive = '{$navActive|escape}';
-//--></script>
-
 <script type="text/javascript">var switchTo5x=true;</script>
 <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
 <script type="text/javascript">stLight.options({publisher: "ur-e79d9e1-f51c-1414-1e26-3fbda98a2d9"}); </script><!--Load the AJAX API-->
@@ -57,6 +53,13 @@ function drawChart() {
 	<div id="header">
     	<a href="/"><img src="/images/logo.png" width="200" height="50" alt="StockTickerApps" /></a>
 		<div id="links">
+
+
+<%= form_tag "/ticker", :method => 'get' do %>
+  <%= text_field_tag(:id) %>
+  <%= submit_tag("Go",:class => 'button') %>
+<% end %>
+
 			<span>Enter Symbol:</span> <input id="tickerSearch" name="tickerSearch" type="text" />
             <input id="searchSymbol" type="button" value="Go" class="button" /> &nbsp; 
 			<a href="#">About Us</a> |
