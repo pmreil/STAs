@@ -54,14 +54,12 @@ function drawChart() {
     	<a href="/"><img src="/images/logo.png" width="200" height="50" alt="StockTickerApps" /></a>
 		<div id="links">
 
-
-<%= form_tag "/security/loadTicker", :method => 'get' do %>
+      <span>Enter Symbol:</span>
+<%= form_tag security_path(:id), :method => 'get' do %>
   <%= text_field_tag(:id) %>
   <%= submit_tag("Go",:class => 'button') %>
 <% end %>
 
-			<span>Enter Symbol:</span> <input id="tickerSearch" name="tickerSearch" type="text" />
-            <input id="searchSymbol" type="button" value="Go" class="button" /> &nbsp; 
 			<a href="#">About Us</a> |
       <a href="#">Twitter</a> |
       <a href="#">Contact</a>

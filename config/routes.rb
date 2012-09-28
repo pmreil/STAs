@@ -9,8 +9,9 @@ Sta::Application.routes.draw do
 
   #get "static/contact"
 
-  match 'ticker/:id' => 'security#loadTicker'
-
+  #match 'ticker/:id' => 'security#loadTicker', :as => :ticker
+  match '/ticker' => 'security#loadTicker', :as => :ticker
+ 
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -24,6 +25,7 @@ Sta::Application.routes.draw do
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
+  resources :security
 
   # Sample resource route with options:
   #   resources :products do

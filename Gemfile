@@ -1,6 +1,8 @@
 source 'http://rubygems.org'
 
-gem 'rails', '>=3.0.6'
+gem 'rails', '>=3.2.8'
+
+gem 'bootstrap-sass', '2.0.4'
 
 gem 'feedzirra'
 
@@ -11,6 +13,12 @@ gem 'activerecord-postgresql-adapter'
 
 #gem 'sqlite3-ruby', '1.3.2', :require => 'sqlite3'
 gem 'mysql2'
+
+group :assets do
+  gem 'sass-rails', "  >= 3.2.3"
+  gem 'coffee-rails', ">= 3.2.1"
+  gem 'uglifier', '>= 1.0.3'
+end
 
 group :development do
   gem 'rspec-rails', '2.5.0'
