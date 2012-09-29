@@ -4,6 +4,8 @@ gem 'rails', '>=3.2.8'
 
 gem 'bootstrap-sass', '2.0.4'
 
+gem 'jquery-rails'
+
 gem 'feedzirra'
 
 gem 'activerecord-postgresql-adapter'
