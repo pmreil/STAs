@@ -27,7 +27,7 @@ class Security < ActiveRecord::Base
   belongs_to :company_sector
 
   def to_param 
-    name
+    ticker
   end
   
   def ticker_views( num_days = nil )
