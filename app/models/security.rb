@@ -26,6 +26,10 @@ class Security < ActiveRecord::Base
   belongs_to :company_industry
   belongs_to :company_sector
 
+  def to_param 
+    ticker
+  end
+  
   def ticker_views( num_days = nil )
     if num_days.nil?
       return security_views.count

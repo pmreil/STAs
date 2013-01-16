@@ -1,11 +1,19 @@
+//= require jquery
+//= require jquery_ujs
+//= require_self
+//= require_tree .
+
+// Loads all Bootstrap javascripts
+//= require bootstrap
+
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
 
 $(document).ready(function() {
-	fix_flash();
-	$('#searchSymbol').click(function(){
-		var theSymbol = $('#tickerSearch').val();
-		if (theSymbol != undefined) window.location.href = '/ticker/'+theSymbol;
+	//fix_flash();
+
+	$("#search_button").click(function(){
+		window.location.replace("/security/" + $('#search_symbol').val() );
 	});
 
   $("a[href^='http']").attr('target','_blank');
@@ -135,6 +143,4 @@ function fix_flash() {
         }
     }
 }
-
-
 

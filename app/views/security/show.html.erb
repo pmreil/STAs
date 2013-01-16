@@ -5,7 +5,6 @@
 
 <% if !@errors.nil? %>
 
-
 <p><%= @errors %></p>
 
 </div>
@@ -24,7 +23,7 @@
 
 	<div id="socialLinks">
 
-<span class='st_sharethis_vcount' displayText='ShareThis'></span>
+<!--<span class='st_sharethis_vcount' displayText='ShareThis'></span>
 <span class='st_facebook_vcount' displayText='Facebook'></span>
 <span class='st_twitter_vcount' displayText='Tweet'></span>
 <span class='st_linkedin_vcount' displayText='LinkedIn'></span>
@@ -32,11 +31,9 @@
 <span class='st_email_vcount' displayText='Email'></span>
 <span class='st_plusone_vcount' displayText='Google +1'></span>
 <span class='st_fblike_vcount' displayText='Facebook Like'></span>
-
+-->
   </div>
   <div class="reset"></div>
-</div>
-
 </div>
 
 <script type="text/javascript">
@@ -98,48 +95,89 @@ function drawVisualization() {
 </p>
 
 
-	<div id="accordion">
-		<h3>&rArr; <a href="#" id="latestNewsLink">Latest News for <%=h @security.ticker %></a></h3>
-	    <div id="latestNews" class="acc"><strong>Please wait while the news loads.</strong></div>
-
-		<h3>&rArr; <a href="#" id="latestTweetsLink">Latest Tweets for <%=h @security.ticker %></a></h3>
-	    <div id="latestTweets" class="acc"></div>
-
-		<h3>&rArr; <a href="#" id="latestBlogsLink">Latest Blog Discussions for <%=h @security.ticker %></a></h3>
-	    <div id="latestBlogs" class="acc"></div>
-		<h3>&rArr; <a href="#">Additional Resources for <%=h @security.ticker %></a></h3>
-
-		<h3>&rArr; <a href="#">Additional Resources for <%=h @security.ticker %></a></h3>
-	    <div id="links" class="acc">
-			<div class="links">
-				<a href="http://investing.businessweek.com/research/stocks/snapshot/snapshot.asp?symbol=<%=h @security.ticker %>">Businessweek</a><br/>
+<div class="accordion" id="accordion2">
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" id="latestNewsLink" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+        Latest News for <%=h @security.ticker %>
+      </a>
+    </div>
+    <div id="collapseOne" class="accordion-body collapse">
+      <div class="accordion-inner" id="latestNews">
+        Please wait while the news loads.
+      </div>
+    </div>
+  </div>
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" id="latestTweetsLink" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+				Latest Tweets for <%=h @security.ticker %>
+      </a>
+    </div>
+    <div id="collapseTwo" class="accordion-body collapse" >
+      <div class="accordion-inner" id="latestTweets">
+        Please wait while the tweets load.
+      </div>
+    </div>
+  </div>
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" id="latestBlogsLink" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
+				Latest Blog Discussions for <%=h @security.ticker %>
+      </a>
+    </div>
+    <div id="collapseThree" class="accordion-body collapse" >
+      <div class="accordion-inner" id="latestBlogs">
+        Please wait while the blog links load.
+      </div>
+    </div>
+  </div>
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" id="linksLink" data-toggle="collapse" data-parent="#accordion2" href="#collapseFour">
+				External Resources for <%=h @security.ticker %>
+      </a>
+    </div>
+    <div id="collapseFour" class="accordion-body collapse" >
+      <div class="accordion-inner" id="latestBlogs">
+      	<div class="links">
+						<a href="http://investing.businessweek.com/research/stocks/snapshot/snapshot.asp?symbol=<%=h @security.ticker %>">Businessweek</a><br/>
     	    	<a href="http://money.cnn.com/quote/quote.html?symb=<%=h @security.ticker %>">CNN Money</a><br/>
-				<a href="http://google.brand.edgar-online.com/?sym=<%=h @security.ticker %>">Edgar (SEC Filings)</a><br/>
+						<a href="http://google.brand.edgar-online.com/?sym=<%=h @security.ticker %>">Edgar (SEC Filings)</a><br/>
 	        	<a href="http://finapps.forbes.com/finapps/jsp/finance/compinfo/CIAtAGlance.jsp?tkr=<%=h @security.ticker %>">Forbes</a><br/>
 		        <a href="http://www.google.com/finance?client=ob&q=<%=h @security.ticker %>">Google Finance</a><br/>
-				<a href="http://quote.morningstar.com/stock/s.aspx?t=<%=h @security.ticker %>">Morningstar</a><br/>
+						<a href="http://quote.morningstar.com/stock/s.aspx?t=<%=h @security.ticker %>">Morningstar</a><br/>
     		    <a href="http://caps.fool.com/Ticker/<%=h @security.ticker %>.aspx">The Motley Fool</a>
 			</div>
     	    <div class="links">
         		<a href="http://moneycentral.msn.com/detail/stock_quote?Symbol=<%=h @security.ticker %>">MSN Money </a><br/>
-				<a href="http://moneycentral.msn.com/ownership?Symbol=<%=h @security.ticker %>">MSN Money Major Holders</a><br/>
-	    		<a href="http://www.reuters.com/finance/stocks/overview?rpc=66&symbol=<%=h @security.ticker %>">Reuters</a><br/>
+						<a href="http://moneycentral.msn.com/ownership?Symbol=<%=h @security.ticker %>">MSN Money Major Holders</a><br/>
+	    			<a href="http://www.reuters.com/finance/stocks/overview?rpc=66&symbol=<%=h @security.ticker %>">Reuters</a><br/>
 	    	    <a href="http://seekingalpha.com/symbol/<%=h @security.ticker %>">Seeking Alpha</a><br/>
     	    	<a href="http://online.wsj.com/public/quotes/main.html?symbol=<%=h @security.ticker %>">The Wall Street Journal</a><br/>
 	    	    <a href="http://finance.yahoo.com/q?d=t&s=<%=h @security.ticker %>">Yahoo Finance</a><br/>
-				<a href="http://finance.yahoo.com/q/rr?s=<%=h @security.ticker %>">Yahoo Research Reports</a>
+						<a href="http://finance.yahoo.com/q/rr?s=<%=h @security.ticker %>">Yahoo Research Reports</a>
 	        </div>
     	    <div class="reset"></div>
 	    </div>
-
-		<h3>&rArr; <a href="#" id="commentsLink">Stock Ticker App Comments on <%=h @security.ticker %></a></h3>
-		<div id="comments" class="acc">
+    </div>
+  </div>
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" id="commentsLink" data-toggle="collapse" data-parent="#accordion2" href="#collapseFive">
+				Stock Ticker App Comments on <%=h @security.ticker %>
+      </a>
+    </div>
+    <div id="collapseFive" class="accordion-body" >
+      <div class="accordion-inner" id="latestComments">
 			<script type="text/javascript">  var disqus_developer = true; </script> 
-	        <div id="disqus_thread"></div>
+	     <div id="disqus_thread"></div>
 			<noscript><a href="http://disqus.com/forums/stocktickerapps/?url=ref">View the discussion thread.</a></noscript>
-		</div>
-	</div>
+      </div>
+    </div>
+  </div>
 </div>
+
 
 <div id="sidebar">
 </div>
@@ -153,14 +191,16 @@ function drawVisualization() {
 
 <script type="text/javascript">
 $(document).ready(function($) {
-	$("#accordion").accordion({ collapsible:true,active:false,autoHeight:false });
+	//$("#accordion").accordion({ collapsible:true,active:false,autoHeight:false });
 	$('#fdbk_tab').click(function () { $('#chartContainer').hide(); });
 	$('#fdbk_close').click(function () { $('#chartContainer').show(); });
 
-  $('#latestNewsLink').click(function () { $('#latestNews').load('/security/loadGoogleNews/<%=u @security.ticker %>', function() { $("a[href^='http']").attr('target','_blank'); }); });
-  $('#latestBlogsLink').click(function () { $('#latestBlogs').load('/security/loadGoogleBlog/<%=u @security.name %>', function() { $("a[href^='http']").attr('target','_blank'); }); });
-  $('#latestTweetsLink').click(function () { $('#latestTweets').load('/security/loadTwitterFeed/<%=u @security.ticker %>', function() { $("a[href^='http']").attr('target','_blank'); }); });
+  $('#latestNewsLink').click(function () { $('#latestNews').load('/security/loadGoogleNews/<%= @security.ticker %>', function() { $("a[href^='http']").attr('target','_blank'); }); });
+  $('#latestBlogsLink').click(function () { $('#latestBlogs').load('/security/loadGoogleBlog/<%= @security.name %>', function() { $("a[href^='http']").attr('target','_blank'); }); });
+  $('#latestTweetsLink').click(function () { $('#latestTweets').load('/security/loadTwitterFeed/<%= @security.ticker %>', function() { $("a[href^='http']").attr('target','_blank'); }); });
   $('#commentsLink').click(function () { $.getScript('http://disqus.com/forums/stocktickerapps/embed.js'); });
+
+$('#latestTweetsLink').click();
 
 });
 
@@ -170,8 +210,4 @@ $(document).ready(function($) {
 	<ul id="tweets"> </ul>
 
 
-<<<<<<< .merge_file_5RVRTG
 <% end %>
-=======
-<% end %>
->>>>>>> .merge_file_rsp8j4

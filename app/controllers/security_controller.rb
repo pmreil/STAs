@@ -8,7 +8,8 @@ class SecurityController < ApplicationController
         #IF A FUND, GET THE FUND FAMILY and FUN CATEOGRY      
 
 
-  def loadTicker
+  #def loadTicker
+  def show
     if params[:id].nil?
       #they didnt pass anything in - abort
       @errors = 'Ticker Required'
@@ -53,17 +54,18 @@ class SecurityController < ApplicationController
               fund_faily_record = FundFamily.create(:name => fund_family)
             end
           end
+
           #okay we've loaded the details of the sector/industry or fund family/fund category_record
           #now lets get the exchange and name
           quotes_query_url = 'http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20%3D%20%22'+params[:id]+'%22&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys'
           yql_response = Net::HTTP.get_response(URI.parse(quotes_query_url))
+          json = ActiveSupport::JSON
           quotes_query_data = json.decode(yql_response.body)
           stock_exchange = quotes_query_data['query']['results']['quote']['StockExchange']
           stock_exchange_record = SecurityExchange.where(:name => stock_exchange).first
           if stock_exchange_record.nil? #then lets add it
             stock_exchange_record = SecurityExchange.create(:name => stock_exchange)
           end
-
 
           #okay lets finally add the record to the security table
           if isStock
@@ -101,6 +103,17 @@ class SecurityController < ApplicationController
           @security.percentage_views(20),
           @security.percentage_views(10)
          ]
+
+        #if we dont have the name for it load it now
+        if @security.name == ""
+          #lets get the exchange and name
+          quotes_query_url = 'http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20%3D%20%22'+params[:id]+'%22&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys'
+          yql_response = Net::HTTP.get_response(URI.parse(quotes_query_url))
+          json = ActiveSupport::JSON
+          quotes_query_data = json.decode(yql_response.body)        
+          @security.name = quotes_query_data['query']['results']['quote']['Name']
+          @security.save
+        end
       end
 
       if !@security.nil? && cookies[@security.ticker].nil?
