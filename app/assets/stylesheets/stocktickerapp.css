@@ -84,6 +84,12 @@ DIV#accordion DIV.acc {
 	overflow:auto;
 	-moz-border-radius: 8px;
 	-webkit-border-radius: 8px;
+	height:300px;
+}
+
+DIV.accordion-inner {
+	height:100px
+	overflow:auto;
 }
 
 DIV.links {

@@ -200,6 +200,8 @@ $(document).ready(function($) {
   $('#latestTweetsLink').click(function () { $('#latestTweets').load('/security/loadTwitterFeed/<%= @security.ticker %>', function() { $("a[href^='http']").attr('target','_blank'); }); });
   $('#commentsLink').click(function () { $.getScript('http://disqus.com/forums/stocktickerapps/embed.js'); });
 
+$('#latestTweetsLink').click();
+
 });
 
 </script>
