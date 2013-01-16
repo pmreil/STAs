@@ -88,7 +88,7 @@ DIV#accordion DIV.acc {
 }
 
 DIV.accordion-inner {
-	height:100px
+	height:100px;
 	overflow:auto;
 }
 
