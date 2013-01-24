@@ -54,8 +54,8 @@ function drawChart() {
         <div class="container">
            <a href="/"><%= image_tag('logo.jpg') %></a>
 Enter Symbol:
-  <%= text_field_tag('search_symbol') %>
-  <%= button_tag("Go",:class => 'button',:id => 'search_button') %>
+  <%= text_field_tag('search_symbol',nil,:class => 'input-medium search-query') %>
+  <%= button_tag("Go",:class => 'btn btn-primary',:id => 'search_button') %>
           <nav>
             <ul class="nav pull-right">
               <li><%= link_to "About Us",    '#' %></li>
