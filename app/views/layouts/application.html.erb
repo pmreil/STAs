@@ -2,29 +2,25 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>stocktickerapps.com</title>
+
 <meta http-equiv="Content-language" content="en-US" />
 <meta http-equiv="Description" content="" />
 <meta http-equiv="Keywords" content="" />
-<link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon" />
 
 <%= stylesheet_link_tag "application", media: "all" %>
 <%= javascript_include_tag "application" %>
 <%= csrf_meta_tag %>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <script type="text/javascript">var switchTo5x=true;</script>
 <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
 <script type="text/javascript">stLight.options({publisher: "ur-e79d9e1-f51c-1414-1e26-3fbda98a2d9"}); </script>
-
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJ40GKpiEJ_E7xILKULwnv5JzcO4X9tMM&sensor=false">
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-<script type="text/javascript">
-   
-// Load the Visualization API and the piechart package.
-google.load('visualization', '1.0', {'packages':['corechart']});
-     
-</script>
+<script type="text/javascript">google.load('visualization', '1.0', {'packages':['corechart']});</script>
+
 </head>
 <body>
 
@@ -79,66 +75,6 @@ google.load('visualization', '1.0', {'packages':['corechart']});
 
   var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
 </script>
-
-<script type="text/javascript">
-//var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-//document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-<script type="text/javascript">
-try {
-//var pageTracker = _gat._getTracker("UA-15248080-1");
-//pageTracker._trackPageview();
-} catch(err) {}</script>
-
-
-    <div id="yourinfo"></div>
-    <script type="text/javascript">
-            visitor = google.loader.ClientLocation;
-            visitor_lat = google.loader.ClientLocation.latitude;
-            visitor_lon = google.loader.ClientLocation.longitude;
-            visitor_city = google.loader.ClientLocation.address.city;
-            visitor_region = google.loader.ClientLocation.address.region;
-            visitor_country = google.loader.ClientLocation.address.country;
-            visitor_countrycode = google.loader.ClientLocation.address.country_code;
-console.log(visitor);
-            document.getElementById('yourinfo').innerHTML = visitor + '<p>Lat/Lon: ' + visitor_lat + ' / ' + visitor_lon + '</p><p>Location: ' + visitor_city + ', ' + visitor_region + ', ' + visitor_country + ' (' + visitor_countrycode + ')</p>';
-    </script>
-
-<div id="map_canvas" />
-<script type='text/javascript' src='https://www.google.com/jsapi'></script>
-  <script type='text/javascript'>
-   google.load('visualization', '1', {'packages': ['geomap']});
-   google.setOnLoadCallback(drawMap);
-
-    function drawMap() {
-      var data = google.visualization.arrayToDataTable([
-        ['City', 'Popularity'],
-        ['New York', 200],
-        ['Boston', 300],
-        ['Miami', 400],
-        ['Chicago', 500],
-        ['Los Angeles', 600],
-        ['Houston', 700],
-        ['Trumbull',1000],
-        ['Brookfield, CT',100]
-      ]);
-
-      var options = {};
-      options['region'] = 'US';
-      options['colors'] = [0xFF8747, 0xFFB581, 0xc06000]; //orange colors
-      options['dataMode'] = 'markers';
-
-      var container = document.getElementById('map_canvas');
-      var geomap = new google.visualization.GeoMap(container);
-      geomap.draw(data, options);
-    };
-
-  </script>
-
-      <footer>
-        <p>&copy; Company 2012</p>
-      </footer>
-
 
 </body>
 </html>

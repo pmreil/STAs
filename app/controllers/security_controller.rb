@@ -8,7 +8,6 @@ class SecurityController < ApplicationController
         #IF A FUND, GET THE FUND FAMILY and FUN CATEOGRY      
 
 
-  #def loadTicker
   def show
     if params[:id].nil?
       #they didnt pass anything in - abort
