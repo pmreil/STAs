@@ -1,4 +1,5 @@
 @import "bootstrap";
+@import "bootstrap-responsive";
 
 /* universal */
 
@@ -7,7 +8,7 @@ html {
 }
 
 body {
-  padding-top: 80px;
+  padding-top: 50px;
 }
 
 section {
@@ -25,3 +26,24 @@ textarea {
 .center h1 {
   margin-bottom: 10px;
 }
+
+
+.show-grid {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.show-grid [class*="span"] {
+  background-color: #eee;
+  -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+          border-radius: 3px;
+  min-height: 40px;
+}
+
+.show-grid [class*="span"]:hover {
+  background-color: #ddd;
+}
+
+.itemDate{font-size:11px;color:#AAAAAA;display:inline}
+

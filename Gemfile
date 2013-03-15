@@ -8,6 +8,9 @@ gem 'jquery-rails'
 
 gem 'feedzirra'
 
+#update to support vulnerability
+gem 'json', '>= 1.7.7'
+
 gem 'activerecord-postgresql-adapter'
 
 # Bundle edge Rails instead:

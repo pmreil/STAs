@@ -2,11 +2,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>stocktickerapps.com</title>
+
 <meta http-equiv="Content-language" content="en-US" />
 <meta http-equiv="Description" content="" />
 <meta http-equiv="Keywords" content="" />
-<link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon" />
 
 <%= stylesheet_link_tag "application", media: "all" %>
 <%= javascript_include_tag "application" %>
@@ -15,56 +17,44 @@
 <script type="text/javascript">var switchTo5x=true;</script>
 <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
 <script type="text/javascript">stLight.options({publisher: "ur-e79d9e1-f51c-1414-1e26-3fbda98a2d9"}); </script>
-
-
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJ40GKpiEJ_E7xILKULwnv5JzcO4X9tMM&sensor=false">
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-<script type="text/javascript">
-   
-// Load the Visualization API and the piechart package.
-google.load('visualization', '1.0', {'packages':['corechart']});
-     
-// Callback that creates and populates a data table, 
-// instantiates the pie chart, passes in the data and
-// draws it.
-function drawChart() {
-  // Create the data table.
-  var data = new google.visualization.DataTable();
-  data.addColumn('string', 'Topping');
-  data.addColumn('number', 'Slices');
-  data.addRows([
-   ['Mushrooms', 3],
-   ['Onions', 1],
-   ['Olives', 1], 
-   ['Zucchini', 1],
-   ['Pepperoni', 2]
-  ]);
+<script type="text/javascript">google.load('visualization', '1.0', {'packages':['corechart']});</script>
 
-  // Set chart options
-  var options = {'title':'How Much Pizza I Ate Last Night','width':400,'height':300};
-
-  // Instantiate and draw our chart, passing in some options.
-  var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-  chart.draw(data, options);
-}
-</script>
 </head>
 <body>
-    <header class="navbar navbar-fixed-top">
+
+<div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
-           <a href="/"><%= image_tag('logo.jpg') %></a>
-Enter Symbol:
-  <%= text_field_tag('search_symbol',nil,:class => 'input-medium search-query') %>
-  <%= button_tag("Go",:class => 'btn btn-primary',:id => 'search_button') %>
-          <nav>
-            <ul class="nav pull-right">
-              <li><%= link_to "About Us",    '#' %></li>
-              <li><%= link_to "Contact",    '#' %></li>
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/">StockTickerApps</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li><a href="#about">About</a></li>
+              <li><a href="#contact">Contact</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Movement <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Stocks</a></li>
+                  <li><a href="#">Funds</a></li>
+                  <li><a href="#">Sectors</a></li>
+                </ul>
+              </li>
             </ul>
-          </nav>
+            <form class="navbar-form pull-right" onsubmit="return false;">
+  <%= text_field_tag('search_symbol',nil,:class => 'input-medium search-query',:placeholder => "Symbol") %>
+  <%= button_tag("Go",:type => 'button',:class => 'btn btn-primary',:id => 'search_button') %>
+            </form>
+          </div><!--/.nav-collapse -->
         </div>
       </div>
-    </header>
+    </div>
+
     <div class="container">
       <%= yield %>
     </div>
@@ -80,21 +70,11 @@ Enter Symbol:
   feedback_widget_options.display = "overlay";  
   feedback_widget_options.company = "stock_ticker_apps";
   feedback_widget_options.placement = "right";
-  feedback_widget_options.color = "#415b81";
+  feedback_widget_options.color = "#0044cc";
   feedback_widget_options.style = "idea";
 
   var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
 </script>
-
-<script type="text/javascript">
-//var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-//document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-<script type="text/javascript">
-try {
-//var pageTracker = _gat._getTracker("UA-15248080-1");
-//pageTracker._trackPageview();
-} catch(err) {}</script>
 
 </body>
 </html>

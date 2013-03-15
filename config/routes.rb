@@ -8,9 +8,6 @@ Sta::Application.routes.draw do
   #get "static/about"
 
   #get "static/contact"
-
-  #match 'ticker/:id' => 'security#loadTicker', :as => :ticker
-  #match '/ticker' => 'security#loadTicker', :as => :ticker
  
   # The priority is based upon order of creation:
   # first created -> highest priority.

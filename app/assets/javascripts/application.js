@@ -2,6 +2,7 @@
 //= require jquery_ujs
 //= require_self
 //= require_tree .
+//= require FeedEk
 
 // Loads all Bootstrap javascripts
 //= require bootstrap
@@ -13,7 +14,14 @@ $(document).ready(function() {
 	//fix_flash();
 
 	$("#search_button").click(function(){
-		window.location.replace("/security/" + $('#search_symbol').val() );
+		window.location.href = "/security/" + $('#search_symbol').val();
+	});
+
+	$("#search_symbol").keypress(function (e) {
+	  if (e.which == 13) {
+	  	alert('asfd');
+  	  $('#search_button').click();
+  	}
 	});
 
   $("a[href^='http']").attr('target','_blank');
@@ -79,14 +87,6 @@ $(document).ready(function() {
 		window.UpdatePanel = UpdatePanel;
 	})();
 
-/*
-	UpdatePanel.init({
-		interval : 5000,
-		number : 15,
-		url : "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22YHOO%22%2C%22AAPL%22%2C%22GOOG%22%2C%22MSFT%22)%0A%09%09&format=json&env=http%3A%2F%2Fdatatables.org%2Falltables.env&callback=null",
-		elem : $('#tweets'),
-	});
-*/
 
 });
 
@@ -143,4 +143,16 @@ function fix_flash() {
         }
     }
 }
+
+
+function map_initialize() {
+        var mapOptions = {
+          center: new google.maps.LatLng(-34.397, 150.644),
+          zoom: 8,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById("map_canvas"),
+            mapOptions);
+      }
+
 
