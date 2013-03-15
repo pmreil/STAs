@@ -148,7 +148,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord-postgresql-adapter
   annotate (>= 2.5.0)
-  bootstrap-sass (>= 2.0.4)
+  bootstrap-sass
   coffee-rails (>= 3.2.1)
   feedzirra
   jquery-rails
