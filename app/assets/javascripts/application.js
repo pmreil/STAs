@@ -17,7 +17,6 @@ $(document).ready(function() {
 
 	$("#search_symbol").keypress(function (e) {
 	  if (e.which == 13) {
-	  	alert('asfd');
   	  $('#search_button').click();
   	}
 	});
