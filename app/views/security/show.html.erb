@@ -7,180 +7,111 @@
 
 <% else %>
 
+<!-- outer row that has two columns - nav and content -->
 <div class="row">
-      <div class="span2 bs-docs-sidebar">
-        <ul class="nav nav-list bs-docs-sidenav">
-          <li><a href="#download-bootstrap"><i class="icon-chevron-right"></i> Download</a></li>
-          <li><a href="#file-structure"><i class="icon-chevron-right"></i> File structure</a></li>
-          <li><a href="#contents"><i class="icon-chevron-right"></i> What's included</a></li>
-          <li><a href="#html-template"><i class="icon-chevron-right"></i> HTML template</a></li>
-          <li><a href="#examples"><i class="icon-chevron-right"></i> Examples</a></li>
-          <li><a href="#what-next"><i class="icon-chevron-right"></i> What next?</a></li>
-        </ul>
-      </div>
-      <div class="span10">
+  <div class="span2 bs-docs-sidebar">
+    <ul class="nav nav-list bs-docs-sidenav">
+      <li><a href="#summary"><i class="icon-chevron-right"></i> Summary</a></li>
+      <li><a href="#tweets"><i class="icon-chevron-right"></i> Tweets</a></li>
+      <li><a href="#discussion"><i class="icon-chevron-right"></i> Discussion</a></li>
+      <li><a href="#html-template"><i class="icon-chevron-right"></i> HTML template</a></li>
+      <li><a href="#examples"><i class="icon-chevron-right"></i> Examples</a></li>
+      <li><a href="#what-next"><i class="icon-chevron-right"></i> What next?</a></li>
+    </ul>
+  </div>
 
-<div class="row">
+  <!-- right column wrapper -->
   <div class="span10">
-  	<h1><a href="http://www.google.com/search?q=<%=h @security.name %>&btnI=745" target="_blank"><%=h @security.name %></a> (<%=h @security.ticker %>)</h1>
-  </div>
-</div>
 
-<div class="row">
-  <!-- chart -->
-  <div class="span7" style="height:375px;">
+    <section id="summary">
 
-    <% if @security.security_type == 'stock' %>
-
-    <script type="text/javascript" src="https://s3.amazonaws.com/tradingview/tv.js"></script>
-    <script type="text/javascript">
-    new TradingView.widget({
-      "autosize": true,
-      "symbol": "<%=h @security.ticker %>",
-      "interval": "D",
-      "toolbar_bg": "#E4E8EB",
-      "details": true
-    });
-    </script>
-
-    <% else %>
-
-    <script src="http://charts.wikinvest.com/wikinvest/wikichart/javascript/scripts.php" type="text/javascript"></script><div id="wikichartContainer_9ECF28BD-EFE9-443E-B328-50F0D173104F"><div style="width: 100%; text-align: center; vertical-align: center; margin-top: 100px;"><a href="http://get.adobe.com/flashplayer/"><img src="http://cdn.wikinvest.com/wikinvest/images/adobe_flash_logo.gif" alt="Flash" style="border-width: 0px;"/><br/>Flash Player 9 or higher is required to view the chart<br/><strong>Click here to download Flash Player now</strong></a></div></div><script type="text/javascript">if (typeof(embedWikichart) != "undefined") {embedWikichart("http://charts.wikinvest.com/WikiChartMini.swf","wikichartContainer_9ECF28BD-EFE9-443E-B328-50F0D173104F","100%","400",{"showAnnotations":"true","liveQuote":"true","ticker":"<%=h @security.ticker %>","rollingDate":"6 months","embedCodeDate":"2013-3-9"},{});}</script>
-
-    <% end %>
-
-
-  </div>
-  <!-- analytic data -->
-  <div class="span3">
-    <div class="well">
-      <strong>Date Added:</strong> <%= @security.created_at.to_date %><br/>
-      <strong>Total Views:</strong> <%= @security.ticker_views %><br/>
-      <strong>Views in last week:</strong> <%= @security.ticker_views 7 %><br/>
-      <strong>Views in last month:</strong> <%= @security.ticker_views 31 %><br/>
-      <strong>Views in last year:</strong> <%= @security.ticker_views 365 %><br/>
+    <div class="row">
+      <div class="span10">
+  	     <h1><a href="http://www.google.com/search?q=<%=h @security.name %>&btnI=745" target="_blank"><%=h @security.name %></a> (<%=h @security.ticker %>)</h1>
+      </div>
     </div>
 
-    <!--adsense links -->
-    <div class="well">
-<!--      <script type="text/javascript"><!--
-        google_ad_client = "ca-pub-0066874388719652";
-        google_ad_slot = "6753552882";
-        google_ad_width = 300;
-        google_ad_height = 250;
-      //--><!--</script>
-      <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>-->
-    </div>
-  </div>
-</div>
+    <div class="row">
+      <!-- chart -->
+      <div class="span7" style="height:375px;">
+        <%= render "chart" %>
+      </div>
 
-<div class="row show-grid">
-    <!-- geo loads -->
-    <div class="span3">
-      <div class="well">
+      <!-- analytic data -->
+      <div class="span3">
+        <div class="well">
+          <strong>Date Added:</strong> <%= @security.created_at.to_date %><br/>
+          <strong>Total Views:</strong> <%= @security.ticker_views %><br/>
+          <strong>Views in last week:</strong> <%= @security.ticker_views 7 %><br/>
+          <strong>Views in last month:</strong> <%= @security.ticker_views 31 %><br/>
+          <strong>Views in last year:</strong> <%= @security.ticker_views 365 %><br/>
+        </div>
+      </div>
+    </div>
+    <!-- end top row-->
+
+    </section>
+    
+    <section id="tweets">
+
+    <div class="row show-grid">
+      <h4>Tweets & News</h4>
+
+      <!-- geo loads -->
+      <div class="span3">
+        <div class="well">
         <%= @security.inspect() %>
+        </div>
       </div>
-    </div>
 
-    <!-- latest news -->
-    <div class="span4">
-      <div class="well">
-        <h5>Latest News for <%= @security.ticker.upcase %></h5>
-        <div id="latestNews">No news available for <%= @security.ticker %></div>
+      <!-- latest news -->
+      <div class="span4">
+        <div class="well">
+          <h5>Latest News for <%= @security.ticker.upcase %></h5>
+          <div id="latestNews">No news available for <%= @security.ticker %></div>
+        </div>
       </div>
-    </div>
 
-    <!-- latest tweets -->
-    <div class="span3" >
-      <div class="well">
-        <h5>Latest Tweets for <%= @security.ticker.upcase %></h5>
-        <div id="latestTweets">No tweets match <%= @security.ticker %></div>
+      <!-- latest tweets -->
+      <div class="span3" >
+        <div class="well">
+          <h5>Latest Tweets for <%= @security.ticker.upcase %></h5>
+          <div id="latestTweets">No tweets match <%= @security.ticker %></div>
+        </div>
       </div>
+
     </div>
+    <!-- end second row -->
 
-</div>
-<!--
-<div class="row">
-    <!-- geo loads -->
-    <div class="span3">
-<!--      <div class="well">
+    </section>
+    
+    <section id="discussion">
+    <div class="row">
 
+      <!-- geo loads -->
+      <div class="span3">
+         <h4>Geography of Views</h4>
+      </div>
+    
+      <div class="span7">
+        <h4>Discussions</h4>
+        <div id="disqus_thread"></div>
+      </div>
 
-  <% if !@security_trends.nil? %>
-  <script type="text/javascript">
-
-  // Set a callback to run when the Google Visualization API is loaded.
-  google.setOnLoadCallback(drawVisualization);
-
-  function drawVisualization() {
-  // Create and populate the data table.
-  var data = google.visualization.arrayToDataTable([
-    ['x', 'Days'],
-    ['100',<%=@security_trends[0] %>],
-    ['90',<%=@security_trends[1] %>],
-    ['80',<%=@security_trends[2] %>],
-    ['70',<%=@security_trends[3] %>],
-    ['60',<%=@security_trends[4] %>],
-    ['50',<%=@security_trends[5] %>],
-    ['40',<%=@security_trends[6] %>],
-    ['30',<%=@security_trends[7] %>],
-    ['20',<%=@security_trends[8] %>],
-    ['10',<%=@security_trends[9] %>],
-    ['1',<%=@security.percentage_views %>]
-  ]);
-
-  // Create and draw the visualization.
-  new google.visualization.LineChart(document.getElementById('chart_div')).
-      draw(data, {title:'Percentage of traffic over the last 100 days',curveType: "function",
-                 width: 700, height: 300,
-                 vAxis: {maxValue: 1}}
-       );
-}
-
-</script>
-<% end %>
- -->     </div>
-<!--    <div id="yourinfo"></div>
-    <script type="text/javascript">
-            visitor_lat = google.loader.ClientLocation.latitude;
-            visitor_lon = google.loader.ClientLocation.longitude;
-            visitor_city = google.loader.ClientLocation.address.city;
-            visitor_region = google.loader.ClientLocation.address.region;
-            visitor_country = google.loader.ClientLocation.address.country;
-            visitor_countrycode = google.loader.ClientLocation.address.country_code;
-            document.getElementById('yourinfo').innerHTML = visitor + '<p>Lat/Lon: ' + visitor_lat + ' / ' + visitor_lon + '</p><p>Location: ' + visitor_city + ', ' + visitor_region + ', ' + visitor_country + ' (' + visitor_countrycode + ')</p>';
-    </script>-->
-<!--
-    <div class="span7" id="disqus_thread"></div>
-    <script type="text/javascript">
+      <script type="text/javascript">
         var disqus_shortname = 'stocktickerapps';
         (function() {
             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
             dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
-    </script>
+      </script>
+    </div>
+    
+    </section>
+    <!-- end third row --> 
+
   </div>
--->
-<!--
-						<a href="http://investing.businessweek.com/research/stocks/snapshot/snapshot.asp?symbol=<%=h @security.ticker %>">Businessweek</a><br/>
-    	    	<a href="http://money.cnn.com/quote/quote.html?symb=<%=h @security.ticker %>">CNN Money</a><br/>
-						<a href="http://google.brand.edgar-online.com/?sym=<%=h @security.ticker %>">Edgar (SEC Filings)</a><br/>
-	        	<a href="http://finapps.forbes.com/finapps/jsp/finance/compinfo/CIAtAGlance.jsp?tkr=<%=h @security.ticker %>">Forbes</a><br/>
-		        <a href="http://www.google.com/finance?client=ob&q=<%=h @security.ticker %>">Google Finance</a><br/>
-						<a href="http://quote.morningstar.com/stock/s.aspx?t=<%=h @security.ticker %>">Morningstar</a><br/>
-    		    <a href="http://caps.fool.com/Ticker/<%=h @security.ticker %>.aspx">The Motley Fool</a>
-        		<a href="http://moneycentral.msn.com/detail/stock_quote?Symbol=<%=h @security.ticker %>">MSN Money </a><br/>
-						<a href="http://moneycentral.msn.com/ownership?Symbol=<%=h @security.ticker %>">MSN Money Major Holders</a><br/>
-	    			<a href="http://www.reuters.com/finance/stocks/overview?rpc=66&symbol=<%=h @security.ticker %>">Reuters</a><br/>
-	    	    <a href="http://seekingalpha.com/symbol/<%=h @security.ticker %>">Seeking Alpha</a><br/>
-    	    	<a href="http://online.wsj.com/public/quotes/main.html?symbol=<%=h @security.ticker %>">The Wall Street Journal</a><br/>
-	    	    <a href="http://finance.yahoo.com/q?d=t&s=<%=h @security.ticker %>">Yahoo Finance</a><br/>
-						<a href="http://finance.yahoo.com/q/rr?s=<%=h @security.ticker %>">Yahoo Research Reports</a>
--->
-
-
-</div>
 
 
 <script type="text/javascript">

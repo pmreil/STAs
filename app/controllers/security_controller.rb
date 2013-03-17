@@ -56,10 +56,12 @@ class SecurityController < ApplicationController
 
           #okay we've loaded the details of the sector/industry or fund family/fund category_record
           #now lets get the exchange and name
-          quotes_query_url = 'http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20%3D%20%22'+params[:id]+'%22&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys'
+          quotes_query_url = 'http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quote%20where%20symbol%20%3D%20%22'+params[:id]+'%22&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys'
           yql_response = Net::HTTP.get_response(URI.parse(quotes_query_url))
           json = ActiveSupport::JSON
           quotes_query_data = json.decode(yql_response.body)
+
+puts quotes_query_data
           stock_exchange = quotes_query_data['query']['results']['quote']['StockExchange']
           stock_exchange_record = SecurityExchange.where(:name => stock_exchange).first
           if stock_exchange_record.nil? #then lets add it

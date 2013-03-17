@@ -3,10 +3,6 @@
 
 /* universal */
 
-/*html {
-  overflow-y: scroll;
-}*/
-
 .center h1 {
   margin-bottom: 10px;
 }
@@ -33,27 +29,12 @@
 .itemTitle a:hover{ text-decoration:underline }
 .itemDate{font-size:11px;color:#AAAAAA;} 
 
-/* Sections
--------------------------------------------------- */
-
-/* padding for in-page bookmarks and fixed navbar */
-section {
-  padding-top: 30px;
-}
-section > .page-header,
-section > .lead {
-  color: #5a5a5a;
-}
-section > ul li {
-  margin-bottom: 5px;
-}
-
-
 /* Sidenav for Docs
 -------------------------------------------------- */
 
 .bs-docs-sidenav {
   margin: 15px 0 0;
+  width:170px;
   padding: 0;
   background-color: #fff;
   -webkit-border-radius: 6px;
@@ -106,7 +87,7 @@ section > ul li {
 }
 .bs-docs-sidenav .active .icon-chevron-right,
 .bs-docs-sidenav .active a:hover .icon-chevron-right {
-  background-image: url(../img/glyphicons-halflings-white.png);
+
   opacity: 1;
 }
 .bs-docs-sidenav.affix {
@@ -118,8 +99,17 @@ section > ul li {
   bottom: 270px;
 }
 
+.hero-unit {
+  background-image: url(/assets/background.jpg);
+  background-repeat: no-repeat;
+}
 
-html,
+.hero-unit h1, .hero-unit p { color:white; }
+
+      /* Sticky footer styles
+      -------------------------------------------------- */
+
+      html,
       body {
         height: 100%;
         /* The html and body elements cannot have any padding or margin. */
@@ -143,3 +133,56 @@ html,
         background-color: #f5f5f5;
       }
 
+      /* Lastly, apply responsive CSS fixes as necessary */
+      @media (max-width: 767px) {
+        #footer {
+          margin-left: -20px;
+          margin-right: -20px;
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+      }
+
+/* Sections
+-------------------------------------------------- */
+
+/* padding for in-page bookmarks and fixed navbar */
+section {
+  padding-top: 30px;
+}
+section > .page-header,
+section > .lead {
+  color: #5a5a5a;
+}
+section > ul li {
+  margin-bottom: 5px;
+}
+
+/* Separators (hr) */
+.bs-docs-separator {
+  margin: 40px 0 39px;
+}
+
+/* Faded out hr */
+hr.soften {
+  height: 1px;
+  margin: 70px 0;
+  background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,.1), rgba(0,0,0,0));
+  background-image:    -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,.1), rgba(0,0,0,0));
+  background-image:     -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,.1), rgba(0,0,0,0));
+  background-image:      -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,.1), rgba(0,0,0,0));
+  border: 0;
+}
+
+
+
+      /* Custom page CSS
+      -------------------------------------------------- */
+      /* Not required for template or sticky footer method. */
+
+      #wrap > .container {
+        padding-top: 60px;
+      }
+      .container .credit {
+        margin: 20px 0;
+      }
