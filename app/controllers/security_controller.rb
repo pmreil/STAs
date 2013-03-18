@@ -56,13 +56,12 @@ class SecurityController < ApplicationController
 
           #okay we've loaded the details of the sector/industry or fund family/fund category_record
           #now lets get the exchange and name
-          quotes_query_url = 'http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quote%20where%20symbol%20%3D%20%22'+params[:id]+'%22&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys'
-          yql_response = Net::HTTP.get_response(URI.parse(quotes_query_url))
+          name_query_url = 'http://autoc.finance.yahoo.com/autoc?query='+params[:id]+'&callback=YAHOO.Finance.SymbolSuggest.ssCallback'
+          yql_response = Net::HTTP.get_response(URI.parse(name_query_url))
           json = ActiveSupport::JSON
-          quotes_query_data = json.decode(yql_response.body)
-
-puts quotes_query_data
-          stock_exchange = quotes_query_data['query']['results']['quote']['StockExchange']
+          yql_response.body = yql_response.body.gsub("YAHOO.Finance.SymbolSuggest.ssCallback(","").gsub(")","")
+          name_query_data = json.decode(yql_response.body)
+          stock_exchange = name_query_data['ResultSet']['Result'][0]['exchDisp']
           stock_exchange_record = SecurityExchange.where(:name => stock_exchange).first
           if stock_exchange_record.nil? #then lets add it
             stock_exchange_record = SecurityExchange.create(:name => stock_exchange)
@@ -72,7 +71,7 @@ puts quotes_query_data
           if isStock
             @security = Security.create(
               :ticker => params[:id],
-              :name => quotes_query_data['query']['results']['quote']['Name'],
+              :name => name_query_data['ResultSet']['Result'][0]['name'],
               :exchange_id => stock_exchange_record.id,
               :security_type => 'stock',
               :company_industry_id => industry_record.id,
@@ -81,7 +80,7 @@ puts quotes_query_data
           else
             @security = Security.create(
               :ticker => params[:id],
-              :name => quotes_query_data['query']['results']['quote']['Name'],
+              :name => name_query_data['ResultSet']['Result'][0]['name'],
               :exchange_id => stock_exchange_record.id,
               :security_type => 'fund',
               :fund_category_id => category_record.id,
@@ -108,11 +107,12 @@ puts quotes_query_data
         #if we dont have the name for it load it now
         if @security.name == ""
           #lets get the exchange and name
-          quotes_query_url = 'http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20%3D%20%22'+params[:id]+'%22&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys'
-          yql_response = Net::HTTP.get_response(URI.parse(quotes_query_url))
+          name_query_url = 'http://autoc.finance.yahoo.com/autoc?query='+params[:id]+'&callback=YAHOO.Finance.SymbolSuggest.ssCallback'
+          yql_response = Net::HTTP.get_response(URI.parse(name_query_url))
           json = ActiveSupport::JSON
-          quotes_query_data = json.decode(yql_response.body)        
-          @security.name = quotes_query_data['query']['results']['quote']['Name']
+          yql_response.body = yql_response.body.gsub("YAHOO.Finance.SymbolSuggest.ssCallback(","").gsub(")","")
+          name_query_data = json.decode(yql_response.body)
+          @security.name = name_query_data['ResultSet']['Result'][0]['name']
           @security.save
         end
       end
@@ -131,26 +131,5 @@ puts quotes_query_data
     end    
 
   end
-
-  def loadTwitterFeed
-    @feedUrl = "http://search.twitter.com/search.atom?q=%24"+params[:id]
-    @feed = Feedzirra::Feed.fetch_and_parse(@feedUrl)
-    puts @feed
-    render :layout => false
-  end
-
-  def loadGoogleNews
-    @feedUrl = 'http://www.google.com/finance/company_news?q='+params[:id]+'&output=rss'
-    @feed = Feedzirra::Feed.fetch_and_parse(@feedUrl)
-    render :layout => false
-  end
-
-  def loadGoogleBlog
-    @feedUrl = 'http://www.google.com/search?q='+params[:id]+'&hl=en&tbm=blg&output=atom'
-    #@feedUrl = 'http://www.google.com/search?hl=en&q="'+params[:id]+'"&ie=utf-8&tbm=blg&output=rss'
-    @feed = Feedzirra::Feed.fetch_and_parse(@feedUrl)
-    render :layout => false
-  end
-
 
 end

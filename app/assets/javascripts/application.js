@@ -1,5 +1,6 @@
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
 //= require_self
 //= require_tree .
 //= require FeedEk
@@ -26,11 +27,11 @@ $(document).ready(function() {
     // side bar
     setTimeout(function () {
       $('.bs-docs-sidenav').affix({
-        /*offset: {
+        offset: {
           top: function () { return $window.width() <= 980 ? 290 : 210 }
         , bottom: 270
-        }*/
-        offset: { x: 10 }
+        }
+        //offset: { x: 0 }
       })
     }, 100)
 

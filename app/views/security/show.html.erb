@@ -2,21 +2,24 @@
 
 <div class="row">
   <div class="span12 well">
+    <% @title = "some custom page title" %>
     <%= @errors %></div>
 </div>
 
 <% else %>
+    
+<% @title = @security.name %>
 
 <!-- outer row that has two columns - nav and content -->
 <div class="row">
   <div class="span2 bs-docs-sidebar">
     <ul class="nav nav-list bs-docs-sidenav">
       <li><a href="#summary"><i class="icon-chevron-right"></i> Summary</a></li>
-      <li><a href="#tweets"><i class="icon-chevron-right"></i> Tweets</a></li>
+      <li><a href="#tweets"><i class="icon-chevron-right"></i> Tweets & News</a></li>
+      <li><a href="#examples"><i class="icon-chevron-right"></i> Viewer Trends</a></li>
+      <li><a href="#html-template"><i class="icon-chevron-right"></i> Viewer Locations</a></li>
       <li><a href="#discussion"><i class="icon-chevron-right"></i> Discussion</a></li>
-      <li><a href="#html-template"><i class="icon-chevron-right"></i> HTML template</a></li>
-      <li><a href="#examples"><i class="icon-chevron-right"></i> Examples</a></li>
-      <li><a href="#what-next"><i class="icon-chevron-right"></i> What next?</a></li>
+      <li><a href="#what-next"><i class="icon-chevron-right"></i> Links</a></li>
     </ul>
   </div>
 
@@ -27,7 +30,7 @@
 
     <div class="row">
       <div class="span10">
-  	     <h1><a href="http://www.google.com/search?q=<%=h @security.name %>&btnI=745" target="_blank"><%=h @security.name %></a> (<%=h @security.ticker %>)</h1>
+  	     <h3><a href="http://www.google.com/search?q=<%=h @security.name %>&btnI=745" target="_blank"><%=h @security.name %></a> (<%=h @security.ticker.upcase %>)</h3>
       </div>
     </div>
 
@@ -40,11 +43,21 @@
       <!-- analytic data -->
       <div class="span3">
         <div class="well">
-          <strong>Date Added:</strong> <%= @security.created_at.to_date %><br/>
+          <p class="text-info"><strong>Security Views Details</strong></p>
           <strong>Total Views:</strong> <%= @security.ticker_views %><br/>
           <strong>Views in last week:</strong> <%= @security.ticker_views 7 %><br/>
           <strong>Views in last month:</strong> <%= @security.ticker_views 31 %><br/>
           <strong>Views in last year:</strong> <%= @security.ticker_views 365 %><br/>
+          <br/>
+          <% if @security.security_type == 'fund' %>
+          <p class="text-info"><strong>Fund Details</strong></p>
+            <strong>Fund Category:</strong> <%= link_to @security.fund_category.name, :controller => "fund_category", :action => "show", :id => @security.fund_category.id %><br/>
+            <strong>Fund Family:</strong> <%= link_to @security.fund_family.name, :controller => "fund_family", :action => "show", :id => @security.fund_family.id %><br/>
+          <% else %>
+          <p class="text-info"><strong>Equity Details</strong></p>
+            <strong>Industry:</strong> <%= link_to @security.company_industry.name, :controller => "company_industry", :action => "show", :id => @security.company_industry.id %><br/>
+            <strong>Sector:</strong> <%= link_to @security.company_sector.name, :controller => "company_sector", :action => "show", :id => @security.company_sector.id %><br/>
+          <% end %>
         </div>
       </div>
     </div>
@@ -55,17 +68,10 @@
     <section id="tweets">
 
     <div class="row show-grid">
-      <h4>Tweets & News</h4>
-
-      <!-- geo loads -->
-      <div class="span3">
-        <div class="well">
-        <%= @security.inspect() %>
-        </div>
-      </div>
+      <div class="span10"><h4>Tweets & News</h4></div>
 
       <!-- latest news -->
-      <div class="span4">
+      <div class="span5">
         <div class="well">
           <h5>Latest News for <%= @security.ticker.upcase %></h5>
           <div id="latestNews">No news available for <%= @security.ticker %></div>
@@ -73,7 +79,7 @@
       </div>
 
       <!-- latest tweets -->
-      <div class="span3" >
+      <div class="span5" >
         <div class="well">
           <h5>Latest Tweets for <%= @security.ticker.upcase %></h5>
           <div id="latestTweets">No tweets match <%= @security.ticker %></div>
@@ -87,13 +93,8 @@
     
     <section id="discussion">
     <div class="row">
-
-      <!-- geo loads -->
-      <div class="span3">
-         <h4>Geography of Views</h4>
-      </div>
     
-      <div class="span7">
+      <div class="span10">
         <h4>Discussions</h4>
         <div id="disqus_thread"></div>
       </div>

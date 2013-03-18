@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>stocktickerapps.com</title>
+<title><%= render_title %></title>
 
 <meta http-equiv="Content-language" content="en-US" />
 <meta http-equiv="Description" content="" />
@@ -44,7 +44,7 @@
           </li>
         </ul>
         <form class="navbar-form pull-right" onsubmit="return false;">
-          <%= text_field_tag('search_symbol',nil,:class => 'input-medium search-query',:placeholder => "Symbol") %>
+          <%= text_field_tag('search_symbol',nil,:class => 'input-medium search-query',:placeholder => "Search Symbol") %>
           <%= button_tag("Go",:type => 'button',:class => 'btn btn-primary',:id => 'search_button') %>
         </form>
       </div>
