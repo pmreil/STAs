@@ -11,4 +11,17 @@
 
 class CompanyIndustry < ActiveRecord::Base
   has_many :securities
+
+  def to_param 
+    name
+  end
+
+  def top_industries( num_days = nil )
+    if num_days.nil?
+      return security_views.count
+    else
+      return security_views.where("created_at >= '#{Time.now - num_days.days}'").count
+    end
+  end
+
 end
