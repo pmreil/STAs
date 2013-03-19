@@ -1,0 +1,18 @@
+<% if @security.security_type == 'stock' %>
+  <script type="text/javascript" src="https://s3.amazonaws.com/tradingview/tv.js"></script>
+  <script type="text/javascript">
+    new TradingView.widget({
+      "autosize": true,
+      "symbol": "<%=h @security.ticker %>",
+      "interval": "D",
+      "toolbar_bg": "#E4E8EB",
+      "details": true
+    });
+  </script>
+
+<% else %>
+
+  <script src="http://charts.wikinvest.com/wikinvest/wikichart/javascript/scripts.php" type="text/javascript"></script><div id="wikichartContainer_9ECF28BD-EFE9-443E-B328-50F0D173104F"><div style="width: 100%; text-align: center; vertical-align: center; margin-top: 100px;"><a href="http://get.adobe.com/flashplayer/"><img src="http://cdn.wikinvest.com/wikinvest/images/adobe_flash_logo.gif" alt="Flash" style="border-width: 0px;"/><br/>Flash Player 9 or higher is required to view the chart<br/><strong>Click here to download Flash Player now</strong></a></div></div><script type="text/javascript">if (typeof(embedWikichart) != "undefined") {embedWikichart("http://charts.wikinvest.com/WikiChartMini.swf","wikichartContainer_9ECF28BD-EFE9-443E-B328-50F0D173104F","100%","400",{"showAnnotations":"true","liveQuote":"true","ticker":"<%=h @security.ticker %>","rollingDate":"6 months","embedCodeDate":"2013-3-9"},{});}</script>
+
+<% end %>
+
