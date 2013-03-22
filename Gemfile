@@ -1,23 +1,11 @@
 source 'http://rubygems.org'
 
 gem 'rails', '>=3.2.8'
-
 gem 'bootstrap-sass'
-
 gem 'jquery-rails'
-
-gem 'feedzirra'
 
 #update to support vulnerability
 gem 'json', '>= 1.7.7'
-
-gem 'activerecord-postgresql-adapter'
-
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
-
-#gem 'sqlite3-ruby', '1.3.2', :require => 'sqlite3'
-gem 'mysql2'
 
 group :assets do
   gem 'sass-rails', "  >= 3.2.3"
@@ -26,8 +14,14 @@ group :assets do
 end
 
 group :development do
+  gem 'mysql2'
   gem 'rspec-rails', '2.5.0'
   gem 'annotate', ">=2.5.0"
+  gem 'rb-readline'
+end
+
+group :production do
+  gem 'activerecord-postgresql-adapter'
 end
 
 group :test do
