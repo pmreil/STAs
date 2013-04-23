@@ -5,8 +5,11 @@ class CompanyIndustryController < ApplicationController
       #they didnt pass anything in - abort
       @errors = 'Industry Required'
     else
-      @industry = CompanyIndustry.where(:name => (params[:id])).first
+      @industry = CompanyIndustry.where(:id => (params[:id])).first
       if @industry.nil?
+        @errors = 'Industry not found'
+      else
+        @topfive = Security.
       end
     end
   end

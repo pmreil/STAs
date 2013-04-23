@@ -23,7 +23,7 @@ Sta::Application.routes.draw do
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
   resources :security
-  resources :company_industry
+  resources :company_industry, :path => "/industry"
 
   # Sample resource route with options:
   #   resources :products do

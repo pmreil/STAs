@@ -31,7 +31,6 @@ $(document).ready(function() {
           top: function () { return $window.width() <= 980 ? 290 : 210 }
         , bottom: 270
         }
-        //offset: { x: 0 }
       })
     }, 100)
 
