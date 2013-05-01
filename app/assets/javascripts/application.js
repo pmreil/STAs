@@ -27,12 +27,11 @@ $(document).ready(function() {
     // side bar
     setTimeout(function () {
       $('.bs-docs-sidenav').affix({
-        offset: {
-          top: function () { return $window.width() <= 980 ? 290 : 210 }
-        , bottom: 270
-        }
+      //  offset: {
+      //    top: 100//function () { return $window.width() <= 980 ? 290 : 210 }
+        //, bottom: 100
+      //  }
       })
-    }, 100)
-
+    }, 100);
 
 });

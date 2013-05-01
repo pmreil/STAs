@@ -3,7 +3,8 @@
 <div class="row">
   <div class="span12 well">
     <% @title = "some custom page title" %>
-    <%= @errors %></div>
+    <%= @errors %>
+  </div>
 </div>
 
 <% else %>
@@ -12,14 +13,13 @@
 
 <!-- outer row that has two columns - nav and content -->
 <div class="row">
-  <div class="span2 bs-docs-sidebar">
+  <div class="span2 sta-sidebar">
     <ul class="nav nav-list bs-docs-sidenav">
       <li><a href="#summary"><i class="icon-chevron-right"></i> Summary</a></li>
       <li><a href="#tweets"><i class="icon-chevron-right"></i> Tweets & News</a></li>
-      <li><a href="#examples"><i class="icon-chevron-right"></i> Viewer Trends</a></li>
-      <li><a href="#html-template"><i class="icon-chevron-right"></i> Viewer Locations</a></li>
+      <li><a href="#trends"><i class="icon-chevron-right"></i> Viewer Trends</a></li>
+      <li><a href="#locations"><i class="icon-chevron-right"></i> Viewer Locations</a></li>
       <li><a href="#discussion"><i class="icon-chevron-right"></i> Discussion</a></li>
-      <li><a href="#what-next"><i class="icon-chevron-right"></i> Links</a></li>
     </ul>
   </div>
 
@@ -91,6 +91,31 @@
 
     </section>
     
+    <section id="trends">
+    <div class="row show-grid">
+    
+      <div class="span10">
+        <h4>Viewer Trends</h4>
+        Here's the content for the viewer trends
+        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+      </div>
+
+    </div>
+    </section>
+    
+
+    <section id="locations">
+    <div class="row">
+    
+      <div class="span10">
+        <h4>Viewer Locations</h4>
+        Here's the view locations.
+      </div>
+
+    </div>
+    </section>
+
+
     <section id="discussion">
     <div class="row">
     
@@ -99,24 +124,14 @@
         <div id="disqus_thread"></div>
       </div>
 
-      <script type="text/javascript">
-        var disqus_shortname = 'stocktickerapps';
-        (function() {
-            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-      </script>
     </div>
-    
     </section>
-    <!-- end third row --> 
 
   </div>
 
+</div>
 
 <script type="text/javascript">
-
 $(document).ready(function($) {
   $('#latestNews').FeedEk({
     FeedUrl : 'http://www.google.com/finance/company_news?q=<%= @security.ticker %>&output=rss',
@@ -136,10 +151,16 @@ $(document).ready(function($) {
     TitleLinkTarget:'_blank'
   });
 
-  $('#commentsLink').click(function () { $.getScript('http://disqus.com/forums/stocktickerapps/embed.js'); });
+  var disqus_shortname = 'stocktickerapps';
+    (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
 
 });
 
 </script>
+
 
 <% end %>
