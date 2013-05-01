@@ -34,22 +34,22 @@ class SecurityController < ApplicationController
             sector = stocks_query_data['query']['results']['stock']['Sector']
             industry = stocks_query_data['query']['results']['stock']['Industry']
             sector_record = CompanySector.where(:name => sector).first
-            if sector_record.nil? #then lets add it
+            if sector_record.nil? && !sector.nil? #then lets add it
               sector_record = CompanySector.create(:name => sector)
             end
             industry_record = CompanyIndustry.where(:name => industry).first
-            if industry_record.nil? #then lets add it
+            if industry_record.nil? && !industry.nil?#then lets add it
               industry_record = CompanyIndustry.create(:name => industry)
             end
           else #then its a fund
             category = stocks_query_data['query']['results']['stock']['Category']
             fund_family = stocks_query_data['query']['results']['stock']['FundFamily']
             category_record = FundCategory.where(:name => category).first
-            if category_record.nil? #then lets add it
+            if category_record.nil? && !category.nil? #then lets add it
               category_record = FundCategory.create(:name => category)
             end
             fund_family_record = FundFamily.where(:name => fund_family).first
-            if fund_family_record.nil? #then lets add it
+            if fund_family_record.nil? && !fund_family.nil? #then lets add it
               fund_faily_record = FundFamily.create(:name => fund_family)
             end
           end
@@ -63,7 +63,7 @@ class SecurityController < ApplicationController
           name_query_data = json.decode(yql_response.body)
           stock_exchange = name_query_data['ResultSet']['Result'][0]['exchDisp']
           stock_exchange_record = SecurityExchange.where(:name => stock_exchange).first
-          if stock_exchange_record.nil? #then lets add it
+          if stock_exchange_record.nil? && !stock_exchange.nil? #then lets add it
             stock_exchange_record = SecurityExchange.create(:name => stock_exchange)
           end
 

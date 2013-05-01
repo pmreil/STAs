@@ -8,4 +8,7 @@ class StaticController < ApplicationController
   def contact
   end
 
+  def terms_conditions
+  end
+
 end

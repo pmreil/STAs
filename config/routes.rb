@@ -4,6 +4,7 @@ Sta::Application.routes.draw do
 
   #get "users/new"
 
+  match "terms_conditions", :to => "static#terms_conditions", :via => "get"
   #match "about", :to => "static#about", :via => "get"
   #get "static/about"
 
