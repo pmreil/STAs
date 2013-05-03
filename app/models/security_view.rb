@@ -12,6 +12,8 @@
 #
 
 class SecurityView < ActiveRecord::Base
-  belongs_to :securities
-
+  belongs_to :security
+  has_one :company_sector, through => :security
+  has_one :company_industry, through => :security
+  has_one :fund_category, through => :security
 end

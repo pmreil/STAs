@@ -11,4 +11,5 @@
 
 class CompanySector < ActiveRecord::Base
   has_many :securities
+  has_many :security_views, through => :security
 end
