@@ -25,6 +25,7 @@ Sta::Application.routes.draw do
   #   resources :products
   resources :security
   resources :company_industry, :path => "/industry"
+  resources :company_sector, :path => "/sector"
 
   # Sample resource route with options:
   #   resources :products do
