@@ -1,0 +1,8 @@
+
+<h1><%= @sector.name %></h1>
+
+          <table class="table table-striped">
+            <% @allSectorViews.each do |sector| %>
+                <tr><td><%= link_to sector.name, company_sector_path(sector) %></td><td></td></tr>
+            <% end %>
+          </table>

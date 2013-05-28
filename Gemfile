@@ -3,6 +3,7 @@ source 'http://rubygems.org'
 gem 'rails', '>=3.2.8'
 gem 'bootstrap-sass'
 gem 'jquery-rails'
+gem 'geocoder'
 
 #update to support vulnerability
 gem 'json', '>= 1.7.7'

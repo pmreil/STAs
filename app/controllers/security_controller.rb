@@ -25,34 +25,10 @@ class SecurityController < ApplicationController
         json = ActiveSupport::JSON
         stocks_query_data = json.decode(yql_response.body)
 
-        if stocks_query_data['query']['results']['stock']['CompanyName'].nil?
+        if !stocks_query_data['query']['results']['stock'].has_key?('CompanyName')
           @errors = "Ticker not found"
         else
           cookies[params[:id]] = { :value => "visited", :expires => 10.minutes.from_now }
-          isStock = stocks_query_data['query']['results']['stock']['FundFamily'].nil?
-          if isStock
-            sector = stocks_query_data['query']['results']['stock']['Sector']
-            industry = stocks_query_data['query']['results']['stock']['Industry']
-            sector_record = CompanySector.where(:name => sector).first
-            if sector_record.nil? && !sector.nil? #then lets add it
-              sector_record = CompanySector.create(:name => sector)
-            end
-            industry_record = CompanyIndustry.where(:name => industry).first
-            if industry_record.nil? && !industry.nil?#then lets add it
-              industry_record = CompanyIndustry.create(:name => industry)
-            end
-          else #then its a fund
-            category = stocks_query_data['query']['results']['stock']['Category']
-            fund_family = stocks_query_data['query']['results']['stock']['FundFamily']
-            category_record = FundCategory.where(:name => category).first
-            if category_record.nil? && !category.nil? #then lets add it
-              category_record = FundCategory.create(:name => category)
-            end
-            fund_family_record = FundFamily.where(:name => fund_family).first
-            if fund_family_record.nil? && !fund_family.nil? #then lets add it
-              fund_faily_record = FundFamily.create(:name => fund_family)
-            end
-          end
 
           #okay we've loaded the details of the sector/industry or fund family/fund category_record
           #now lets get the exchange and name
@@ -67,8 +43,18 @@ class SecurityController < ApplicationController
             stock_exchange_record = SecurityExchange.create(:name => stock_exchange)
           end
 
-          #okay lets finally add the record to the security table
+          isStock = stocks_query_data['query']['results']['stock']['FundFamily'].nil?
           if isStock
+            sector = stocks_query_data['query']['results']['stock']['Sector']
+            industry = stocks_query_data['query']['results']['stock']['Industry']
+            sector_record = CompanySector.where(:name => sector).first
+            if sector_record.nil? && !sector.nil? #then lets add it
+              sector_record = CompanySector.create(:name => sector)
+            end
+            industry_record = CompanyIndustry.where(:name => industry).first
+            if industry_record.nil? && !industry.nil?#then lets add it
+              industry_record = CompanyIndustry.create(:name => industry)
+            end
             @security = Security.create(
               :ticker => params[:id],
               :name => name_query_data['ResultSet']['Result'][0]['name'],
@@ -77,7 +63,17 @@ class SecurityController < ApplicationController
               :company_industry_id => industry_record.id,
               :company_sector_id => sector_record.id
             )
-          else
+          else #then its a fund
+            category = stocks_query_data['query']['results']['stock']['Category']
+            fund_family = stocks_query_data['query']['results']['stock']['FundFamily']
+            category_record = FundCategory.where(:name => category).first
+            if category_record.nil? && !category.nil? #then lets add it
+              category_record = FundCategory.create(:name => category)
+            end
+            fund_family_record = FundFamily.where(:name => fund_family).first
+            if fund_family_record.nil? && !fund_family.nil? #then lets add it
+              fund_faily_record = FundFamily.create(:name => fund_family)
+            end
             @security = Security.create(
               :ticker => params[:id],
               :name => name_query_data['ResultSet']['Result'][0]['name'],
@@ -87,6 +83,8 @@ class SecurityController < ApplicationController
               :fund_family_id => fund_family_record.id
             )
           end
+
+
         end
         @security_trends = nil
       else
@@ -123,7 +121,13 @@ class SecurityController < ApplicationController
         security_view_record = SecurityView.create(
           :security_id => @security.id,
           :viewer_ip_address => request.remote_ip,
-          :viewer_browser_string => request.env['HTTP_USER_AGENT'].downcase
+          :viewer_browser_string => request.env['HTTP_USER_AGENT'].downcase,
+          :lat => request.location.data['latitude'],
+          :lng => request.location.data['longitude'],
+          :city =>,
+          :state =>,
+          :zip =>
+          :county => 
         )
         cookies[@security.ticker] = {:value => 1, :expires => 10.minutes.from_now }
       end
