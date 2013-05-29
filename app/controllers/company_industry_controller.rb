@@ -9,7 +9,7 @@ class CompanyIndustryController < ApplicationController
       if @industry.nil?
         @errors = 'Industry not found'
       else
-        @topfive = Security.
+        #@topfive = Security.
       end
     end
   end
