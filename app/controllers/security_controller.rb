@@ -124,10 +124,10 @@ class SecurityController < ApplicationController
           :viewer_browser_string => request.env['HTTP_USER_AGENT'].downcase,
           :lat => request.location.data['latitude'],
           :lng => request.location.data['longitude'],
-          :city =>,
-          :state =>,
-          :zip =>
-          :county => 
+          :city => request.location.data['city'],
+          :state => request.location.data['region_code'],
+          :zip => request.location.data['zipcode'],
+          :country => request.location.data['country_name'],
         )
         cookies[@security.ticker] = {:value => 1, :expires => 10.minutes.from_now }
       end

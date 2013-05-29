@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110613120530) do
+ActiveRecord::Schema.define(:version => 20130529011437) do
 
   create_table "companies", :force => true do |t|
     t.integer  "company_industry_id"
@@ -76,6 +76,12 @@ ActiveRecord::Schema.define(:version => 20110613120530) do
     t.string   "viewer_browser_string"
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.string   "country"
+    t.float    "lat"
+    t.float    "lng"
   end
 
 end
