@@ -87,8 +87,10 @@ class SecurityController < ApplicationController
 
         end
         @security_trends = nil
+        @security_views = nil
       else
       #okay it is in the system - lets load is past trends
+        @security_views = @security.security_views.limit(100)
         @security_trends = Array[
           @security.percentage_views(100),
           @security.percentage_views(90),
