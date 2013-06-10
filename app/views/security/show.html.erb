@@ -197,9 +197,11 @@ function initialize() {
 
 /* Data points defined as an array of LatLng objects */
 var heatmapData = [
-<% @security_views.each do |view| %>
-  <% if !view.lat.nil? && !view.lng.nil? %>
-    new google.maps.LatLng(<%= view.lat %>, <%= view.lng %>),
+<% if !@security_views.nil? %>
+  <% @security_views.each do |view| %>
+    <% if !view.lat.nil? && !view.lng.nil? %>
+      new google.maps.LatLng(<%= view.lat %>, <%= view.lng %>),
+    <% end %>
   <% end %>
 <% end %>
 ];
