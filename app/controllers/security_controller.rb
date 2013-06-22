@@ -33,11 +33,14 @@ class SecurityController < ApplicationController
           #okay we've loaded the details of the sector/industry or fund family/fund category_record
           #now lets get the exchange and name
           name_query_url = 'http://autoc.finance.yahoo.com/autoc?query='+params[:id]+'&callback=YAHOO.Finance.SymbolSuggest.ssCallback'
-          yql_response = Net::HTTP.get_response(URI.parse(name_query_url))
-          json = ActiveSupport::JSON
-          yql_response.body = yql_response.body.gsub("YAHOO.Finance.SymbolSuggest.ssCallback(","").gsub(")","")
-          name_query_data = json.decode(yql_response.body)
+          yql_response2 = Net::HTTP.get_response(URI.parse(name_query_url))
+          json2 = ActiveSupport::JSON
+          yql_response2.body = yql_response2.body.gsub("YAHOO.Finance.SymbolSuggest.ssCallback(","").gsub(")","")
+          name_query_data = json2.decode(yql_response2.body)
           stock_exchange = name_query_data['ResultSet']['Result'][0]['exchDisp']
+          if (stock_exchange.nil?) 
+            stock_exchange = name_query_data['ResultSet']['Result'][0]['exch']
+          end            
           stock_exchange_record = SecurityExchange.where(:name => stock_exchange).first
           if stock_exchange_record.nil? && !stock_exchange.nil? #then lets add it
             stock_exchange_record = SecurityExchange.create(:name => stock_exchange)
@@ -58,10 +61,10 @@ class SecurityController < ApplicationController
             @security = Security.create(
               :ticker => params[:id],
               :name => name_query_data['ResultSet']['Result'][0]['name'],
-              :exchange_id => stock_exchange_record.id,
+              :exchange_id => stock_exchange_record.nil? ? nil : stock_exchange_record.id,
               :security_type => 'stock',
-              :company_industry_id => industry_record.id,
-              :company_sector_id => sector_record.id
+              :company_industry_id => industry_record.nil? ? nil : industry_record.id,
+              :company_sector_id => sector_record.nil? ? nil : sector_record.id
             )
           else #then its a fund
             category = stocks_query_data['query']['results']['stock']['Category']
@@ -77,10 +80,10 @@ class SecurityController < ApplicationController
             @security = Security.create(
               :ticker => params[:id],
               :name => name_query_data['ResultSet']['Result'][0]['name'],
-              :exchange_id => stock_exchange_record.id,
+              :exchange_id => stock_exchange.nil? ? nil : stock_exchange_record.id,
               :security_type => 'fund',
-              :fund_category_id => category_record.id,
-              :fund_family_id => fund_family_record.id
+              :fund_category_id => category_record.nil? ? nil :category_record.id,
+              :fund_family_id => fund_family_record.nil? ? nil : fund_family_record.id
             )
           end
 

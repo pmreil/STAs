@@ -45,8 +45,10 @@ $(document).ready(function() {
         //console.log(JSON.stringify(jsonResult));
         //console.log(JSON.stringify(jsonResult.ResultSet.Result));
         $.each(jsonResult.ResultSet.Result, function() {
-            //console.log(this.name);
-            tickers.push(this.symbol+" - "+this.name);
+            console.log(this.symbol.charAt(0));
+            if (this.symbol.charAt(0) != '^') {
+              tickers.push(this.symbol+" - "+this.name);
+            }
         });
             return typeof jsonResult == 'undefined' ? false : process(tickers);
       }
@@ -56,7 +58,9 @@ $(document).ready(function() {
       //selectedState = map[item].stateCode;
       console.log(item);
       console.log(item.substring(0,item.indexOf(" -")));
-      return item.substring(0,item.indexOf(" -"));
+      //return item.substring(0,item.indexOf(" -"));
+      $('#search_symbol').val(item.substring(0,item.indexOf(" -")));
+      $('#search_button').click();
     }
   });
 
