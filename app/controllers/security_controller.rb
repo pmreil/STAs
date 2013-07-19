@@ -28,8 +28,6 @@ class SecurityController < ApplicationController
         if !stocks_query_data['query']['results']['stock'].has_key?('CompanyName')
           @errors = "Ticker not found"
         else
-          cookies[params[:id]] = { :value => "visited", :expires => 10.minutes.from_now }
-
           #okay we've loaded the details of the sector/industry or fund family/fund category_record
           #now lets get the exchange and name
           name_query_url = 'http://autoc.finance.yahoo.com/autoc?query='+params[:id]+'&callback=YAHOO.Finance.SymbolSuggest.ssCallback'
@@ -82,45 +80,14 @@ class SecurityController < ApplicationController
               :name => name_query_data['ResultSet']['Result'][0]['name'],
               :exchange_id => stock_exchange.nil? ? nil : stock_exchange_record.id,
               :security_type => 'fund',
-              :fund_category_id => category_record.nil? ? nil :category_record.id,
+              :fund_category_id => category_record.nil? ? nil :   category_record.id,
               :fund_family_id => fund_family_record.nil? ? nil : fund_family_record.id
             )
           end
-
-
-        end
-        @security_trends = nil
-        @security_views = nil
-      else
-      #okay it is in the system - lets load is past trends
-        @security_views = @security.security_views.limit(100)
-        @security_trends = Array[
-          @security.percentage_views(100),
-          @security.percentage_views(90),
-          @security.percentage_views(80),
-          @security.percentage_views(70),
-          @security.percentage_views(60),
-          @security.percentage_views(50),
-          @security.percentage_views(40),
-          @security.percentage_views(30),
-          @security.percentage_views(20),
-          @security.percentage_views(10)
-         ]
-
-        #if we dont have the name for it load it now
-        if @security.name == ""
-          #lets get the exchange and name
-          name_query_url = 'http://autoc.finance.yahoo.com/autoc?query='+params[:id]+'&callback=YAHOO.Finance.SymbolSuggest.ssCallback'
-          yql_response = Net::HTTP.get_response(URI.parse(name_query_url))
-          json = ActiveSupport::JSON
-          yql_response.body = yql_response.body.gsub("YAHOO.Finance.SymbolSuggest.ssCallback(","").gsub(")","")
-          name_query_data = json.decode(yql_response.body)
-          @security.name = name_query_data['ResultSet']['Result'][0]['name']
-          @security.save
         end
       end
 
-      if !@security.nil? && cookies[@security.ticker].nil?
+      if !@security.nil? && cookies[params[:id]].nil?
         #cookie hasnt been set or has expired, so lets save this view
         #finally set a cookie for 10 minutes so reloads arent triggered
         security_view_record = SecurityView.create(
@@ -134,11 +101,39 @@ class SecurityController < ApplicationController
           :zip => request.location.data['zipcode'],
           :country => request.location.data['country_name'],
         )
-        cookies[@security.ticker] = {:value => 1, :expires => 10.minutes.from_now }
+        cookies[params[:id]] = { :value => "visited", :expires => 10.minutes.from_now }
       end
 
-    end    
+      #okay it is in the system - lets load is past trends
+      @security_views = @security.security_views.limit(100)
+      @security_trends = Array[
+          @security.percentage_views(100),
+          @security.percentage_views(90),
+          @security.percentage_views(80),
+          @security.percentage_views(70),
+          @security.percentage_views(60),
+          @security.percentage_views(50),
+          @security.percentage_views(40),
+          @security.percentage_views(30),
+          @security.percentage_views(20),
+          @security.percentage_views(10)
+         ]
+
+      #if we dont have the name for it load it now
+      if @security.name == ""
+        #lets get the exchange and name
+        name_query_url = 'http://autoc.finance.yahoo.com/autoc?query='+params[:id]+'&callback=YAHOO.Finance.SymbolSuggest.ssCallback'
+        yql_response = Net::HTTP.get_response(URI.parse(name_query_url))
+        json = ActiveSupport::JSON
+        yql_response.body = yql_response.body.gsub("YAHOO.Finance.SymbolSuggest.ssCallback(","").gsub(")","")
+        name_query_data = json.decode(yql_response.body)
+        @security.name = name_query_data['ResultSet']['Result'][0]['name']
+        @security.save
+      end
+    
+    end
 
   end
 
 end
+

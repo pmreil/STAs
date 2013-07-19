@@ -4,6 +4,9 @@ gem 'rails', '>=3.2.8'
 gem 'bootstrap-sass'
 gem 'jquery-rails'
 gem 'geocoder'
+gem 'google-analytics-rails'
+gem 'sitemap_generator'
+
 
 #update to support vulnerability
 gem 'json', '>= 1.7.7'

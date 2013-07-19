@@ -51,12 +51,20 @@
           <br/>
           <% if @security.security_type == 'fund' %>
           <p class="text-info"><strong>Fund Details</strong></p>
+            <% if !@security.fund_category.nil? %>
             <strong>Fund Category:</strong> <%= link_to @security.fund_category.name, :controller => "fund_category", :action => "show", :id => @security.fund_category.id %><br/>
+            <% end %>
+            <% if !@security.fund_family.nil? %>
             <strong>Fund Family:</strong> <%= link_to @security.fund_family.name, :controller => "fund_family", :action => "show", :id => @security.fund_family.id %><br/>
+            <% end %>
           <% else %>
           <p class="text-info"><strong>Equity Details</strong></p>
+            <% if !@security.company_industry.nil? %>
             <strong>Industry:</strong> <%= link_to @security.company_industry.name, :controller => "company_industry", :action => "show", :id => @security.company_industry.id %><br/>
+            <% end %>
+            <% if !@security.company_sector.nil? %>
             <strong>Sector:</strong> <%= link_to @security.company_sector.name, :controller => "company_sector", :action => "show", :id => @security.company_sector.id %><br/>
+            <% end %>
           <% end %>
         </div>
       </div>

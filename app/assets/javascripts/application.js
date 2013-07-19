@@ -59,6 +59,7 @@ $(document).ready(function() {
       console.log(item);
       console.log(item.substring(0,item.indexOf(" -")));
       //return item.substring(0,item.indexOf(" -"));
+      $('#search_symbol').attr("placeholder",item.substring(0,item.indexOf(" -")));
       $('#search_symbol').val(item.substring(0,item.indexOf(" -")));
       $('#search_button').click();
     }

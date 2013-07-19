@@ -23,9 +23,11 @@ Sta::Application.routes.draw do
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
-  resources :security
-  resources :company_industry, :path => "/industry"
-  resources :company_sector, :path => "/sector"
+  resources :security, only: [:index, :show]
+  resources :company_industry, :path => "/industry", only: [:index, :show]
+  resources :company_sector, :path => "/sector", only: [:index, :show]
+  resources :fund_category, :path => "/category", only: [:index, :show]
+  resources :fund_family, :path => "/family", only: [:index, :show]
 
   # Sample resource route with options:
   #   resources :products do

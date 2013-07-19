@@ -32,9 +32,9 @@ class Security < ActiveRecord::Base
   
   def ticker_views( num_days = nil )
     if num_days.nil?
-      return security_views.count
+      return self.security_views.count
     else
-      return security_views.where("created_at >= '#{Time.now - num_days.days}'").count
+      return self.security_views.where("created_at >= '#{Time.now - num_days.days}'").count
     end
   end
 

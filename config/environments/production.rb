@@ -64,4 +64,8 @@ Sta::Application.configure do
  
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
+
+  # replace this with your tracker code
+  GA.tracker = "UA-42433221-1"
+
 end

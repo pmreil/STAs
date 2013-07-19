@@ -1,40 +1,45 @@
 
       <!-- Main hero unit for a primary marketing message or call to action -->
       <div class="hero-unit">
-        <h1>Hello, world!</h1>
-        <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-        <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+        <h1>Stock Ticker Apps!</h1>
       </div>
 
       <!-- Example row of columns -->
       <div class="row">
+        
         <div class="span4">
-          <h3>Most Popualar Securities</h3>
+          <h3>Today's Popular Securities</h3>
           <table class="table table-striped">
             <% @allSecurityViews.each do |security| %>
-                <tr><td><%= link_to security.security.name, security.security %></td><td><%= security.views %></td></tr>
+                <tr><td><%= link_to security.security.name+" ("+security.security.ticker.upcase+")", security.security %></td><td><%= security.views %></td></tr>
             <% end %>
           </table>
-          <p><a class="btn" href="#">View details &raquo;</a></p>
         </div>
+        
         <div class="span4">
-          <h3>Most Popualar Sectors</h3>
+          <h3>Today's Popular Sectors</h3>
           <table class="table table-striped">
             <% @allSectorViews.each do |sector| %>
                 <tr><td><%= link_to sector.name, company_sector_path(sector) %></td><td><%= sector.views %></td></tr>
             <% end %>
           </table>
-          <p><a class="btn" href="#">View details &raquo;</a></p>
-       </div>
-        <div class="span4">
-          <h3>Most Popualar Industries</h3>
+          <h3>Today's Popular Industries</h3>
           <table class="table table-striped">
             <% @allIndustryViews.each do |industry| %>
                 <tr><td><%= link_to industry.name, company_industry_path(industry) %></td><td><%= industry.views %></td></tr>
             <% end %>
           </table>
-          <p><a class="btn" href="#">View details &raquo;</a></p>
         </div>
+
+        <div class="span4">
+          <h3>Today's Popular Fund Types</h3>
+          <table class="table table-striped">
+            <% @allFundCategoryViews.each do |category| %>
+                <tr><td><%= link_to category.name, fund_category_path(category) %></td><td><%= category.views %></td></tr>
+            <% end %>
+          </table>
+        </div>
+
       </div>
 
       <hr>
