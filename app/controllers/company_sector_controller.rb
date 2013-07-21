@@ -13,7 +13,7 @@ class CompanySectorController < ApplicationController
       @errors = 'Sector Required'
     else
       @sector = CompanySector.where(:id => (params[:id])).first
-      @allSectorViews = SecurityView.where("securities.company_sector_id = ?",params[:id]).joins(:security).group("security_id").order("count(security_id) desc").limit(10)
+      @allSectorViews = SecurityView.where("securities.company_sector_id = ?",params[:id]).joins(:security).group("security_id,security_views.id").order("count(security_id) desc").limit(10)
       @todaysSectorViews = SecurityView.where("securities.company_sector_id = ? and security_views.created_at >= ?",params[:id],Time.now-1.days).joins(:security).group(:security_id).order("count(security_id) desc")
       @thisWeeksSectorViews = SecurityView.where("securities.company_sector_id = ? and security_views.created_at >= ?",params[:id],Time.now-7.days).joins(:security).group(:security_id).order("count(security_id) desc")
       if @sector.nil?
