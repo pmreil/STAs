@@ -1,32 +1,32 @@
 
-<h2>Views of Securities in the <%= @sector.name %> sector</h2>
+<h2>Views of Securities in the <%= @industry.name %> Industry</h2>
 
 <div class="row">
   <div class="span6">
 
 	<h3>Today's popular views</h3>
   <table class="table table-striped">
-  <% @todaysSectorViews.each do |sector| %>
-    <tr><td><%= link_to sector.security.name+" ("+sector.security.ticker.upcase+")", security_path(sector.security) %></td>
-      <td><div class="text-right"><%= @todaysSectorViews.count[sector.security_id] %> total views</div></td></tr>
+  <% @todaysIndustryViews.each do |industry| %>
+    <tr><td><%= link_to industry.security.name+" ("+industry.security.ticker.upcase+")", security_path(industry.security) %></td>
+      <td><div class="text-right"><%= @todaysIndustryViews.count[industry.security_id] %> total views</div></td></tr>
   <% end %>
   </table>
 
 
 	<h3>This week's popular views</h3>
   <table class="table table-striped">
-  <% @thisWeeksSectorViews.each do |sector| %>
-    <tr><td><%= link_to sector.security.name+" ("+sector.security.ticker.upcase+")", security_path(sector.security) %></td>
-      <td><div class="text-right"><%= @thisWeeksSectorViews.count[sector.security_id] %> total views</div></td></tr>
+  <% @thisWeeksIndustryViews.each do |industry| %>
+    <tr><td><%= link_to industry.security.name+" ("+industry.security.ticker.upcase+")", security_path(industry.security) %></td>
+      <td><div class="text-right"><%= @thisWeeksIndustryViews.count[industry.security_id] %> total views</div></td></tr>
   <% end %>
   </table>
 
 
 	<h3>All time popular views</h3>
   <table class="table table-striped">
-  <% @allSectorViews.each do |sector| %>
-    <tr><td><%= link_to sector.security.name+" ("+sector.security.ticker.upcase+")", security_path(sector.security) %></td>
-      <td><div class="text-right"><%= @allSectorViews.count[sector.security_id] %> total views</div></td></tr>
+  <% @allIndustryViews.each do |industry| %>
+    <tr><td><%= link_to industry.security.name+" ("+industry.security.ticker.upcase+")", security_path(industry.security) %></td>
+      <td><div class="text-right"><%= @allIndustryViews.count[industry.security_id] %> total views</div></td></tr>
   <% end %>
   </table>
 
