@@ -6,6 +6,7 @@ gem 'jquery-rails'
 gem 'geocoder'
 gem 'google-analytics-rails'
 gem 'sitemap_generator'
+gem 'coffee-rails', ">= 3.2.1"
 
 
 #update to support vulnerability
@@ -13,7 +14,6 @@ gem 'json', '>= 1.7.7'
 
 group :assets do
   gem 'sass-rails', "  >= 3.2.3"
-  gem 'coffee-rails', ">= 3.2.1"
   gem 'uglifier', '>= 1.0.3'
 end
 
