@@ -1,0 +1,11 @@
+
+<h2>Most Popular Sectors</h2>
+
+	<h3>All time views</h3>
+  <table class="table table-striped">
+  <% if !@allSectorViews.nil? %>
+  <% @allSectorViews.each do |sector| %>
+    <tr><td><%= link_to sector.security.company_sector.name, company_sector_path(sector) %></td><td><%= @allSectorViews.count[sector.security_id] %> total views</td></tr>
+  <% end %>
+  <% end %>
+  </table>
