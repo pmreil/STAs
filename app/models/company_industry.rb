@@ -11,6 +11,7 @@
 
 class CompanyIndustry < ActiveRecord::Base
   has_many :securities
+  has_many :security_views, through: :securities
 
   def to_param 
     name
