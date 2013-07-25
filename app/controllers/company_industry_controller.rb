@@ -1,7 +1,10 @@
 class CompanyIndustryController < ApplicationController
 
   def index
-    @allIndustryViews = SecurityView.select("company_industry.name as name, count(security_views.id)").joins(:company_industry).joins(:security).includes(:security,:company_industry).group("securities.company_industry_id").order("count(security_id) desc").limit(10)
+    #@allIndustryViews = SecurityView.select("company_industry.name as name, count(security_views.id)").joins(:company_industry).joins(:security).includes(:security,:company_industry).group("securities.company_industry_id").order("count(security_id) desc").limit(10)
+    @allIndustryViews = SecurityView.select("security_views.*, company_industries.name as name, count(security_views.id)").joins(:company_industry,:security).includes(:security,:company_industry).group("securities.company_industry_id").order("count(security_id) desc").limit(10)
+    @allIndustryViews = SecurityView.select("company_industries.name as name, security_views.id, count(security_views.id)").joins(:company_industry,:security).includes(:security,:company_industry).group("securities.company_industry_id").order("count(security_id) desc").limit(10)
+
   end
 
 
