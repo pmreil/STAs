@@ -11,11 +11,12 @@ class CompanyIndustryController < ApplicationController
       @errors = 'Industry Required'
     else
       @industry = CompanyIndustry.where(:id => (params[:id])).first
-      @allIndustryViews = SecurityView.where("securities.company_industry_id = ?",params[:id]).joins(:security).group("security_id").order("count(security_id) desc").limit(10)
-      @todaysIndustryViews = SecurityView.where("securities.company_industry_id = ? and security_views.created_at >= ?",params[:id],Time.now-1.days).joins(:security).group(:security_id).order("count(security_id) desc")
-      @thisWeeksIndustryViews = SecurityView.where("securities.company_industry_id = ? and security_views.created_at >= ?",params[:id],Time.now-7.days).joins(:security).group(:security_id).order("count(security_id) desc")
-      if @sector.nil?
+      if @industry.nil?
         @errors = 'Sector not found'
+      else
+        @allIndustryViews = SecurityView.where("securities.company_industry_id = ?",params[:id]).joins(:security).group("security_id").order("count(security_id) desc").limit(10)
+        @todaysIndustryViews = SecurityView.where("securities.company_industry_id = ? and security_views.created_at >= ?",params[:id],Time.now-1.days).joins(:security).group(:security_id).order("count(security_id) desc").limit(10)
+        @thisWeeksIndustryViews = SecurityView.where("securities.company_industry_id = ? and security_views.created_at >= ?",params[:id],Time.now-7.days).joins(:security).group(:security_id).order("count(security_id) desc").limit(10)  
       end
     end
   end
