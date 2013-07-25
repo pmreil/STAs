@@ -14,7 +14,7 @@ class CompanyIndustryController < ApplicationController
     else
       @industry = CompanyIndustry.where(:id => (params[:id])).first
       if @industry.nil?
-        @errors = 'Sector not found'
+        @errors = 'Industry not found'
       else
         @allIndustryViews = SecurityView.select("security_id,count(security_id)").where("securities.company_industry_id = ?",params[:id]).joins(:security).group("security_id").order("count(security_id) desc").limit(10)
         @todaysIndustryViews = SecurityView.select("security_id,count(security_id)").where("securities.company_industry_id = ? and security_views.created_at >= ?",params[:id],Time.now-1.days).joins(:security).group(:security_id).order("count(security_id) desc").limit(10)
