@@ -1,17 +1,22 @@
 class FundCategoryController < ApplicationController
 
+  def index
+    @allViews = FundCategory.all_views
+  end
+
   def show
     if params[:id].nil?
-      #they didnt pass anything in - abort
       @errors = 'Fund Category ID Required'
     else
       @category = FundCategory.where(:id => (params[:id])).first
       if @category.nil?
-        @errors = 'Fund category not found'
+        @errors = 'Sorry, no fund category with that ID found'
       else
-        @allCategoryViews = SecurityView.select("security_id,count(security_id)").where("securities.fund_category_id = ?",params[:id]).joins(:security).group("security_id").order("count(security_id) desc").limit(10)
-        @todaysCategoryViews = SecurityView.select("security_id,count(security_id)").where("securities.fund_category_id = ? and security_views.created_at >= ?",params[:id],Time.now-1.days).joins(:security).group(:security_id).order("count(security_id) desc").limit(10)
-        @thisWeeksCategoryViews = SecurityView.select("security_id,count(security_id)").where("securities.fund_category_id = ? and security_views.created_at >= ?",params[:id],Time.now-7.days).joins(:security).group(:security_id).order("count(security_id) desc").limit(10)
+        @name = @category.name
+        name = "fund_category"
+        @allViews = SecurityView.subset_views(name,params[:id])
+        @todaysViews = SecurityView.subset_views(name,params[:id],1)
+        @thisWeeksViews = SecurityView.subset_views(name,params[:id],7)
       end
     end
   end
