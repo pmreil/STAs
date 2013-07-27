@@ -84,7 +84,7 @@ function initialize() {
 
 <% @lastTenSecurityViews.each do |x| %>
 
-  var contentString<%= x.id %> = '<%= x.security.name %>';
+  var contentString<%= x.id %> = '<b><a href="/securities/<%=x.security.ticker%>"><%= x.security.name %></a></b><br/><%= x.created_at.in_time_zone(\'Eastern Time (US & Canada)\').strftime "%m/%d/%y %H:%M %Z"%>';
 
   var infowindow<%= x.id %> = new google.maps.InfoWindow({
       content: contentString<%= x.id %>
@@ -99,29 +99,11 @@ function initialize() {
   });
 
   google.maps.event.addListener(viewMarker<%= x.id %>, 'click', function() {
-    infowindow.open(map,viewMarker<%= x.id %>);
+    infowindow<%= x.id %>.open(map,viewMarker<%= x.id %>);
   });  
 
 
 <% end %>
-  var contentString = 'asdf';
-
-  var infowindow = new google.maps.InfoWindow({
-      content: contentString
-  });
-
-  var viewMarker = new google.maps.Marker({
-      position: myLatLng,
-      animation: google.maps.Animation.DROP,
-      map: map,
-      icon: image,
-      title: "title"
-  });
-
-  google.maps.event.addListener(viewMarker, 'click', function() {
-    infowindow.open(map,viewMarker);
-  });  
-
 
 }
 
