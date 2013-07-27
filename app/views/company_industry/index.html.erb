@@ -1,11 +1,11 @@
+<h2>Most Popular Security Industries</h2>
 
-<h2>Most Popular Industries</h2>
+<h3>All time views</h3>
 
-	<h3>All time views</h3>
-  <table class="table table-striped">
-  <% if !@allIndustryViews.nil? %>
-  <% @allIndustryViews.each do |industry| %>
-    <tr><td><%= link_to industry.security.company_industry.name, company_industry_path(industry) %></td><td><%= @allIndustryViews.count[industry.security_id] %> total views</td></tr>
+<table class="table table-striped">
+  <% if !@allViews.nil? %>
+	<% @allViews.each do |view| %>
+    <tr><td><%= link_to view.name, company_industry_path(view.id) %></td><td><%= @allViews.count[view.id] %> total views</td></tr>
+  	<% end %>
   <% end %>
-  <% end %>
-  </table>
+ </table>

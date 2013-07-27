@@ -168,18 +168,12 @@ $(document).ready(function($) {
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
 
-});
-
-</script>
-
-<script type="text/javascript">
-
-$(document).ready(function() {
   loadMaps();
 });
 
 function loadMaps() {
-  google.load("maps", "3", {other_params:'sensor=false', "callback" : initialize});
+  google.load("maps", "3", {other_params:'libraries=visualization&sensor=false', "callback" : initialize});
+  //google.load("visualization", "1");
   var map;
   google.maps.visualRefresh = true;
 }
@@ -199,26 +193,29 @@ function initialize() {
       position: usCenter,
       map: map
   });
+
+  heatMap();
 }
 
+function heatMap() {
 
 /* Data points defined as an array of LatLng objects */
 var heatmapData = [
-<% if !@security_views.nil? %>
-  <% @security_views.each do |view| %>
-    <% if !view.lat.nil? && !view.lng.nil? %>
-      new google.maps.LatLng(<%= view.lat %>, <%= view.lng %>),
+  <% if !@security_views.nil? %>
+    <% @security_views.each do |view| %>
+      <% if !view.lat.nil? && !view.lng.nil? %>
+        new google.maps.LatLng(<%= view.lat %>, <%= view.lng %>),
+      <% end %>
     <% end %>
   <% end %>
-<% end %>
-];
+  ];
+  var heatmap = new google.maps.visualization.HeatmapLayer({
+    data: heatmapData
+  });
+  heatmap.setMap(map);
 
-var heatmap = new google.maps.visualization.HeatmapLayer({
-  data: heatmapData
-});
-heatmap.setMap(map);
+}
 
 </script> 
-
 
 <% end %>

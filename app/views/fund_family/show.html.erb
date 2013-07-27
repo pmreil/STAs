@@ -1,25 +1,24 @@
+<% if !@errors.nil? %>
+
+<div class="row">
+  <div class="span12 well"><%= @errors %></div>
+</div>
+
+<% else %>
 
 <h2>Views of Securities in the <%= @family.name %> Fund Family</h2>
 
-	<h3>Today's views</h3>
-  <table class="table table-striped">
-  <% @todaysFamilyViews.each do |family| %>
-    <tr><td><%= link_to family.security.name, security_path(family.security) %></td><td><%= @todaysFamilyViews.count[family.security_id] %> total views</td></tr>
-  <% end %>
-  </table>
+<div class="row">
+  <div class="span6">
+
+<%= render :partial => 'shared/popular_views' %>
+
+  </div>
+  <div class="span6">
+    Right Column
+  </div>
+
+</div>
 
 
-	<h3>This week's views</h3>
-  <table class="table table-striped">
-  <% @thisWeeksFamilyViews.each do |family| %>
-    <tr><td><%= link_to family.security.name, security_path(family.security) %></td><td><%= @thisWeeksFamilyViews.count[family.security_id] %> total views</td></tr>
-  <% end %>
-  </table>
-
-
-	<h3>All time views</h3>
-  <table class="table table-striped">
-  <% @allFamilyViews.each do |family| %>
-    <tr><td><%= link_to family.security.name, security_path(family.security) %></td><td><%= @allFamilyViews.count[family.security_id] %> total views</td></tr>
-  <% end %>
-  </table>
+<% end %>

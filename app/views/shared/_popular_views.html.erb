@@ -1,0 +1,29 @@
+	<h3>Today's most popular views</h3>
+  <table class="table table-striped">
+  <% if @todaysViews.empty? %>
+    <tr><td>No views of <%= @name %> securities today</td></tr>
+  <% end %>
+  <% @todaysViews.each do |view| %>
+    <tr><td><%= link_to view.security.name+" ("+view.security.ticker.upcase+")", security_path(view.security) %></td>
+      <td><div class="text-right"><%= @todaysViews.count[view.security_id] %> total views</div></td></tr>
+  <% end %>
+  </table>
+
+	<h3>This week's most popular views</h3>
+  <table class="table table-striped">
+  <% if @thisWeeksViews.empty? %>
+    <tr><td>No views of <%= @name %> securities this week</td></tr>
+  <% end %>
+  <% @thisWeeksViews.each do |view| %>
+    <tr><td><%= link_to view.security.name+" ("+view.security.ticker.upcase+")", security_path(view.security) %></td>
+      <td><div class="text-right"><%= @thisWeeksViews.count[view.security_id] %> total views</div></td></tr>
+  <% end %>
+  </table>
+
+	<h3>All time most popular views</h3>
+  <table class="table table-striped">
+  <% @allViews.each do |view| %>
+    <tr><td><%= link_to view.security.name+" ("+view.security.ticker.upcase+")", security_path(view.security) %></td>
+      <td><div class="text-right"><%= @allViews.count[view.security_id] %> total views</div></td></tr>
+  <% end %>
+  </table>

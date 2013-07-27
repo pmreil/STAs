@@ -11,17 +11,10 @@
 
 class CompanyIndustry < ActiveRecord::Base
   has_many :securities
+  has_many :security_views, through: :securities
 
-  def to_param 
-    name
-  end
-
-  def top_industries( num_days = nil )
-    if num_days.nil?
-      return security_views.count
-    else
-      return security_views.where("created_at >= '#{Time.now - num_days.days}'").count
-    end
+  def self.all_views
+    select("company_industries.id,company_industries.name,count(security_views.id)").joins(:security_views).group("company_industries.id").order("count(security_id) desc").limit(10)
   end
 
 end

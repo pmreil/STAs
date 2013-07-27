@@ -1,18 +1,22 @@
 class FundFamilyController < ApplicationController
 
+  def index
+    @allViews = FundFamily.all_views
+  end
+
   def show
     if params[:id].nil?
-      #they didnt pass anything in - abort
       @errors = 'Fund Family ID Required'
     else
       @family = FundFamily.where(:id => (params[:id])).first
-
-      #@allSectorViews = SecurityView.select("security_id,count(security_id)").where("securities.company_sector_id = ?",params[:id]).joins(:security).group("security_id").order("count(security_id) desc")
-      @allFamilyViews = SecurityView.select("security_id,count(security_id)").where("securities.fund_family_id = ?",params[:id]).joins(:security).group("security_id").order("count(security_id) desc").limit(10)
-      @todaysFamilyViews = SecurityView.select("security_id,count(security_id)").where("securities.fund_family_id = ? and security_views.created_at >= ?",params[:id],Time.now-1.days).joins(:security).group(:security_id).order("count(security_id) desc").limit(10)
-      @thisWeeksFamilyViews = SecurityView.select("security_id,count(security_id)").where("securities.fund_family_id = ? and security_views.created_at >= ?",params[:id],Time.now-7.days).joins(:security).group(:security_id).order("count(security_id) desc").limit(10)
       if @family.nil?
-        @errors = 'Fund family not found'
+        @errors = 'Sorry, no fund family with that ID found'
+      else
+        @name = @family.name
+        name = "fund_family"
+        @allViews = SecurityView.subset_views(name,params[:id])
+        @todaysViews = SecurityView.subset_views(name,params[:id],1)
+        @thisWeeksViews = SecurityView.subset_views(name,params[:id],7)
       end
     end
   end

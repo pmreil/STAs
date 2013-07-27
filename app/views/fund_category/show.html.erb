@@ -1,25 +1,23 @@
+<% if !@errors.nil? %>
+
+<div class="row">
+  <div class="span12 well"><%= @errors %></div>
+</div>
+
+<% else %>
 
 <h2>Views of Securities in the <%= @category.name %> Fund Category</h2>
 
-	<h3>Today's views</h3>
-  <table class="table table-striped">
-  <% @todaysCategoryViews.each do |category| %>
-    <tr><td><%= link_to category.security.name, security_path(category.security) %></td><td><%= @todaysCategoryViews.count[category.security_id] %> total views</td></tr>
-  <% end %>
-  </table>
+<div class="row">
+  <div class="span6">
 
+<%= render :partial => 'shared/popular_views' %>
 
-	<h3>This week's views</h3>
-  <table class="table table-striped">
-  <% @thisWeeksCategoryViews.each do |category| %>
-    <tr><td><%= link_to category.security.name, security_path(category.security) %></td><td><%= @thisWeeksCategoryViews.count[category.security_id] %> total views</td></tr>
-  <% end %>
-  </table>
+  </div>
+  <div class="span6">
+    Right Column
+  </div>
 
+</div>
 
-	<h3>All time views</h3>
-  <table class="table table-striped">
-  <% @allCategoryViews.each do |category| %>
-    <tr><td><%= link_to category.security.name, security_path(category.security) %></td><td><%= @allCategoryViews.count[category.security_id] %> total views</td></tr>
-  <% end %>
-  </table>
+<% end %>
