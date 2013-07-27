@@ -4,6 +4,9 @@
         <h1>Stock Ticker Apps!</h1>
       </div>
 
+      <h4>Last 10 Security Views</h4>
+      <div id="map-canvas" style="width:100%;height:290px;"></div>
+
       <!-- Example row of columns -->
       <div class="row">
         
@@ -45,3 +48,88 @@
       <hr>
 
     </div> <!-- /container -->
+
+
+<script type="text/javascript">
+$(document).ready(function($) {
+  loadMaps();
+});
+
+function loadMaps() {
+  google.load("maps", "3", {other_params:'libraries=visualization&sensor=false', "callback" : initialize});
+  //google.load("visualization", "1");
+  var map;
+  google.maps.visualRefresh = true;
+}
+
+function initialize() {
+  var usCenter = new google.maps.LatLng(39.8282, -98.5795);
+  var mapOptions = {
+    zoom: 4,
+    center: usCenter,
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+    panControl: true,
+    streetViewControl: true,
+    overviewMapControl: true
+  };
+  map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
+  //var marker = new google.maps.Marker({
+  //    position: usCenter,
+  //    map: map
+  //});
+
+  var image = '/assets/chart.png';
+
+  var myLatLng = usCenter;
+
+<% @lastTenSecurityViews.each do |x| %>
+
+  var contentString<%= x.id %> = '<%= x.security.name %>';
+
+  var infowindow<%= x.id %> = new google.maps.InfoWindow({
+      content: contentString<%= x.id %>
+  });
+
+  var viewMarker<%= x.id %> = new google.maps.Marker({
+      position: new google.maps.LatLng(<%= x.lat %>,<%= x.lng %>),
+      animation: google.maps.Animation.DROP,
+      map: map,
+      icon: image,
+      title: "title"
+  });
+
+  google.maps.event.addListener(viewMarker<%= x.id %>, 'click', function() {
+    infowindow.open(map,viewMarker<%= x.id %>);
+  });  
+
+
+<% end %>
+  var contentString = 'asdf';
+
+  var infowindow = new google.maps.InfoWindow({
+      content: contentString
+  });
+
+  var viewMarker = new google.maps.Marker({
+      position: myLatLng,
+      animation: google.maps.Animation.DROP,
+      map: map,
+      icon: image,
+      title: "title"
+  });
+
+  google.maps.event.addListener(viewMarker, 'click', function() {
+    infowindow.open(map,viewMarker);
+  });  
+
+
+}
+
+
+
+
+
+
+</script> 
+
+
