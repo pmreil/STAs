@@ -105,6 +105,8 @@
       <div class="span10">
         <h4>Viewer Trends</h4>
         Here's the content for the viewer trends
+        <div id="chart_div"></div>
+
       </div>
 
     </div>
@@ -142,6 +144,10 @@
 </div>
 
 <script type="text/javascript">
+
+  google.load('visualization', '1', {'packages':['corechart']});
+  google.setOnLoadCallback(drawChart);
+
 $(document).ready(function($) {
   $('#latestNews').FeedEk({
     FeedUrl : 'http://www.google.com/finance/company_news?q=<%= @security.ticker %>&output=rss',
@@ -169,7 +175,12 @@ $(document).ready(function($) {
         })();
 
   loadMaps();
+
+  //var options = {packages: ['corechart'], callback : ""};
+  //google.load('visualization', '1', options);
+
 });
+
 
 function loadMaps() {
   google.load("maps", "3", {other_params:'libraries=visualization&sensor=false', "callback" : initialize});
@@ -214,6 +225,39 @@ var heatmapData = [
   });
   heatmap.setMap(map);
 
+}
+
+
+//google.setOnLoadCallback(drawChart);
+function drawChart() {
+  var data = google.visualization.arrayToDataTable([
+    ['Days Ago', 'Views'],
+    <% i = 100 %>
+    <% @security_trends.each do |x| %>
+      [<%= i  %>,<%= x %>],
+      <% i -= 10 %>
+    <% end %>
+    ]);
+
+  var options = {
+    title: 'Percentage of views for <%= @security.name %> across all views over the last 100 days',
+    hAxis: {title: 'Days Ago'},
+    vAxis: {title: 'Percentage of Security Views'},
+    legend: 'none',
+    //trendlines: { 0: {} }    // Draw a trendline for data series 0.
+ trendlines: {
+      0: {
+        color: 'purple',
+        lineWidth: 10,
+        opacity: 0.2,
+        visibleInLegend: true,
+        //type: 'exponential',
+      }
+    }
+  };
+
+  var chart = new google.visualization.ScatterChart(document.getElementById('chart_div'));
+  chart.draw(data, options);
 }
 
 </script> 
