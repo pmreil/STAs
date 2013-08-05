@@ -30,23 +30,26 @@ class Security < ActiveRecord::Base
     ticker
   end
   
-  def ticker_views( num_days = nil )
-    if num_days.nil?
+  def ticker_views( num_weeks_back = nil )
+    if num_weeks_back.nil?
       return self.security_views.count
     else
-      return self.security_views.where("created_at >= '#{Time.now - num_days.days}'").count
+      return self.security_views.where("created_at >= '#{Time.now - (7*num_weeks_back).days}' and created_at <= '#{Time.now - (7*(num_weeks_back-1)).days}'").count
     end
   end
 
-  def percentage_views (num_days = nil)
-    if num_days.nil?
+  def percentage_weekly_views (num_weeks_back = nil)
+    if num_weeks_back.nil?
       total_views = SecurityView.count
       the_ticker_views = ticker_views
     else
-      total_views = SecurityView.where("created_at >= '#{Time.now - num_days.days}'").count
-      the_ticker_views = ticker_views num_days
+      total_views = SecurityView.where("created_at >= '#{Time.now - (7*num_weeks_back).days}' and created_at <= '#{Time.now - (7*(num_weeks_back-1)).days}'").count
+      the_ticker_views = ticker_views num_weeks_back
     end
-    the_ticker_views / total_views.to_f
+    if the_ticker_views == 0
+      return 0
+    end
+    the_ticker_views.to_f / total_views.to_f
   end
 
   

@@ -112,16 +112,16 @@ class SecurityController < ApplicationController
       #okay it is in the system - lets load is past trends
       @security_views = @security.security_views.order("id desc").limit(100)
       @security_trends = Array[
-          @security.percentage_views(100),
-          @security.percentage_views(90),
-          @security.percentage_views(80),
-          @security.percentage_views(70),
-          @security.percentage_views(60),
-          @security.percentage_views(50),
-          @security.percentage_views(40),
-          @security.percentage_views(30),
-          @security.percentage_views(20),
-          @security.percentage_views(10)
+          @security.percentage_weekly_views(10),
+          @security.percentage_weekly_views(9),
+          @security.percentage_weekly_views(8),
+          @security.percentage_weekly_views(7),
+          @security.percentage_weekly_views(6),
+          @security.percentage_weekly_views(5),
+          @security.percentage_weekly_views(4),
+          @security.percentage_weekly_views(3),
+          @security.percentage_weekly_views(2),
+          @security.percentage_weekly_views(1),
          ]
 
       #if we dont have the name for it load it now
