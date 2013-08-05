@@ -1,8 +1,9 @@
 
       <!-- Main hero unit for a primary marketing message or call to action -->
-      <div class="hero-unit">
-        <h1>Stock Ticker Apps!</h1>
-      </div>
+      <h1>Stock Ticker Apps!</h1>
+      <p class="lead">
+        StockTickerApps.com let's you research and view information about stocks and mutual funds. We then display what securities are viewed by our visitors along with trends by security, sector and fund category. This data is kept anonymous and shows up to minute browsing information.
+      </p>
 
       <div id="map-canvas" style="width:100%;height:290px;"></div>
 
@@ -83,7 +84,7 @@ function initialize() {
 
 <% @lastTenSecurityViews.each do |x| %>
 
-  var contentString<%= x.id %> = "<b><a href=/securities/<%=x.security.ticker%>><%= x.security.name %></a></b><br/>viewed at: <%= x.created_at.in_time_zone('Eastern Time (US & Canada)').strftime '%m/%d/%y %H:%M %Z'%>";
+  var contentString<%= x.id %> = "<b><a href=/security/<%=x.security.ticker%>><%= x.security.name %></a></b><br/>viewed at: <%= x.created_at.in_time_zone('Eastern Time (US & Canada)').strftime '%m/%d/%y %H:%M %Z'%>";
 
   var infowindow<%= x.id %> = new google.maps.InfoWindow({
       content: contentString<%= x.id %>

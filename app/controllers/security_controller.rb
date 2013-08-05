@@ -1,5 +1,10 @@
 class SecurityController < ApplicationController
 
+  def index
+    @allSecurityViews = SecurityView.select("security_id, count(security_id) as views").where("security_views.created_at >= ?",Time.now-1.day).includes(:security).group("security_id").order("views desc").limit(10)
+
+  end
+
     #DOES IT EXIST
     #IF IT DOES, INCREMEMENT THE VIEW
     #IF IT DOESN'T, GET THE DETAILS, CREATE THE RECORD
@@ -105,7 +110,7 @@ class SecurityController < ApplicationController
       end
 
       #okay it is in the system - lets load is past trends
-      @security_views = @security.security_views.limit(100)
+      @security_views = @security.security_views.order("id desc").limit(100)
       @security_trends = Array[
           @security.percentage_views(100),
           @security.percentage_views(90),
