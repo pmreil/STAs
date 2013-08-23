@@ -18,7 +18,7 @@
       <li><a href="#summary"><i class="icon-chevron-right"></i> Summary</a></li>
       <li><a href="#tweets"><i class="icon-chevron-right"></i> Tweets & News</a></li>
       <li><a href="#trends"><i class="icon-chevron-right"></i> Viewer Trends</a></li>
-      <li><a href="#locations"><i class="icon-chevron-right"></i> Viewer Locations</a></li>
+      <li><a href="#view_locations"><i class="icon-chevron-right"></i> Viewer Locations</a></li>
       <li><a href="#discussion"><i class="icon-chevron-right"></i> Discussion</a></li>
       <li>
         <div class="skyscraper">
@@ -78,15 +78,17 @@
             <strong>Sector:</strong> <%= link_to @security.company_sector.name, :controller => "company_sector", :action => "show", :id => @security.company_sector.id %><br/>
             <% end %>
           <% end %>
+
+          <br/>
+          <% if display_ads? %>
+            <%= render :partial => 'shared/ad_rectangle' %>
+          <% else %>
+            <div class="ad-rectangle"></div>
+          <% end %>
+
         </div>
 
-        <div class="rectangle">
-        <% if display_ads? %>
-          <%= render :partial => 'shared/ad_rectangle' %>
-        <% else %>
-          <div class="ad-rectangle"></div>
-        <% end %>
-        </div>
+
 
       </div>
 
@@ -132,41 +134,30 @@
     
     <section id="trends">
     <div class="row show-grid">
-    
       <div class="span10">
         <h4>Viewer Trends</h4>
-        Here's the content for the viewer trends
+        This chart shows trends of when this security was viewed over the last 100 days. Downward sloping lines indicate views have been increasing over time and upward sloping lines indicate views are decreasing.
         <div id="chart_div"></div>
-
       </div>
-
     </div>
     </section>
-    
 
-    <section id="locations">
+    <section id="view_locations">
     <div class="row">
-    
       <div class="span10">
         <h4>Viewer Locations</h4>
-        Here's the view locations.
-      
-<div id="map-canvas" style="width:100%;height:290px;"></div>
-
+        See where the people viewing this security were located
+        <div id="map-canvas" style="width:100%;height:290px;"></div>
       </div>
-
     </div>
     </section>
-
 
     <section id="discussion">
     <div class="row">
-    
       <div class="span10">
         <h4>Discussions</h4>
         <div id="disqus_thread"></div>
       </div>
-
     </div>
     </section>
 
@@ -276,7 +267,7 @@ function drawChart() {
     vAxis: {title: 'Percentage of Security Views'},
     legend: 'none',
     //trendlines: { 0: {} }    // Draw a trendline for data series 0.
- trendlines: {
+    trendlines: {
       0: {
         color: 'purple',
         lineWidth: 10,

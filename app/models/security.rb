@@ -49,7 +49,7 @@ class Security < ActiveRecord::Base
     if the_ticker_views == 0
       return 0
     end
-    the_ticker_views.to_f / total_views.to_f
+    the_ticker_views.to_f / total_views.to_f * 100
   end
 
   
