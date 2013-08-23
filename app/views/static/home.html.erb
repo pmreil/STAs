@@ -11,7 +11,7 @@
       <div class="row">
         
         <div class="span4">
-          <h3>Today's Popular Securities</h3>
+          <h3>Recent Popular Securities</h3>
           <table class="table table-striped">
             <% @allSecurityViews.each do |security| %>
                 <tr><td><%= link_to security.security.name+" ("+security.security.ticker.upcase+")", security.security %></td><td><%= security.views %></td></tr>
@@ -20,13 +20,13 @@
         </div>
         
         <div class="span4">
-          <h3>Today's Popular Sectors</h3>
+          <h3>Recent Popular Sectors</h3>
           <table class="table table-striped">
             <% @allSectorViews.each do |sector| %>
                 <tr><td><%= link_to sector.name, company_sector_path(sector) %></td><td><%= sector.views %></td></tr>
             <% end %>
           </table>
-          <h3>Today's Popular Industries</h3>
+          <h3>Recent Popular Industries</h3>
           <table class="table table-striped">
             <% @allIndustryViews.each do |industry| %>
                 <tr><td><%= link_to industry.name, company_industry_path(industry) %></td><td><%= industry.views %></td></tr>
@@ -35,7 +35,7 @@
         </div>
 
         <div class="span4">
-          <h3>Today's Popular Fund Types</h3>
+          <h3>Recent Popular Fund Types</h3>
           <table class="table table-striped">
             <% @allFundCategoryViews.each do |category| %>
                 <tr><td><%= link_to category.name, fund_category_path(category) %></td><td><%= category.views %></td></tr>

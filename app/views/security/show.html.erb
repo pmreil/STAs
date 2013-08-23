@@ -20,7 +20,19 @@
       <li><a href="#trends"><i class="icon-chevron-right"></i> Viewer Trends</a></li>
       <li><a href="#locations"><i class="icon-chevron-right"></i> Viewer Locations</a></li>
       <li><a href="#discussion"><i class="icon-chevron-right"></i> Discussion</a></li>
+      <li>
+        <div class="skyscraper">
+        <% if display_ads? %>
+          <%= render :partial => 'shared/ad_skyscraper' %>
+        <% else %>
+          <div class="ad-skyscraper"></div>
+        <% end %>
+        </div>
+      </li>
+
     </ul>
+
+
   </div>
 
   <!-- right column wrapper -->
@@ -36,21 +48,21 @@
 
     <div class="row">
       <!-- chart -->
-      <div class="span7" style="height:375px;">
+      <div class="span6" style="height:400px;">
         <%= render "chart" %>
       </div>
 
       <!-- analytic data -->
-      <div class="span3">
+      <div class="span4">
         <div class="well">
-          <p class="text-info"><strong>Security Views Details</strong></p>
+          <span class="text-info"><strong>Security Views Details</strong></span><br/>
           <strong>Total Views:</strong> <%= @security.ticker_views %><br/>
           <strong>Views in last week:</strong> <%= @security.ticker_views 7 %><br/>
           <strong>Views in last month:</strong> <%= @security.ticker_views 31 %><br/>
           <strong>Views in last year:</strong> <%= @security.ticker_views 365 %><br/>
           <br/>
           <% if @security.security_type == 'fund' %>
-          <p class="text-info"><strong>Fund Details</strong></p>
+          <span class="text-info"><strong>Fund Details</strong></span><br/>
             <% if !@security.fund_category.nil? %>
             <strong>Fund Category:</strong> <%= link_to @security.fund_category.name, :controller => "fund_category", :action => "show", :id => @security.fund_category.id %><br/>
             <% end %>
@@ -58,7 +70,7 @@
             <strong>Fund Family:</strong> <%= link_to @security.fund_family.name, :controller => "fund_family", :action => "show", :id => @security.fund_family.id %><br/>
             <% end %>
           <% else %>
-          <p class="text-info"><strong>Equity Details</strong></p>
+          <span class="text-info"><strong>Equity Details</strong></span><br/>
             <% if !@security.company_industry.nil? %>
             <strong>Industry:</strong> <%= link_to @security.company_industry.name, :controller => "company_industry", :action => "show", :id => @security.company_industry.id %><br/>
             <% end %>
@@ -67,7 +79,17 @@
             <% end %>
           <% end %>
         </div>
+
+        <div class="rectangle">
+        <% if display_ads? %>
+          <%= render :partial => 'shared/ad_rectangle' %>
+        <% else %>
+          <div class="ad-rectangle"></div>
+        <% end %>
+        </div>
+
       </div>
+
     </div>
     <!-- end top row-->
 
@@ -98,6 +120,15 @@
     <!-- end second row -->
 
     </section>
+
+    <div class="leaderboard">
+    <% if display_ads? %>
+      <%= render :partial => 'shared/ad_leaderboard' %>
+    <% else %>
+      <div class="ad-leaderboard"></div>
+    <% end %>
+    </div>
+
     
     <section id="trends">
     <div class="row show-grid">

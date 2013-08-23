@@ -5,4 +5,8 @@ module ApplicationHelper
   	"Stock Ticker Apps"
 	end
 
+	def display_ads?
+ 		ENV['RAILS_ENV'] == "production"
+	end
+
 end
